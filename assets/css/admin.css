@@ -1,0 +1,39 @@
+/* Sepo Events — edit screen and events list. Flat: borders and tints, no shadows. */
+.spe-box { --spe-accent: #0b3d33; --spe-line: #dcdcde; --spe-soft: #f6f7f7; }
+.spe-sec { padding: 14px 0; border-bottom: 1px solid #f0f0f1; }
+.spe-sec:first-child { padding-top: 4px; }
+.spe-sec h3 { margin: 0 0 10px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: #50575e; }
+.spe-grid2, .spe-grid3 { display: grid; gap: 12px 16px; }
+.spe-grid2 { grid-template-columns: 1fr 1fr; }
+.spe-grid3 { grid-template-columns: 1fr 1fr 1fr; }
+.spe-box label > span { display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: #1d2327; }
+.spe-box label > input:not([type=checkbox]), .spe-box label > select, .spe-box label > textarea { display: block; width: 100%; max-width: none; }
+.spe-box small { display: block; margin-top: 4px; color: #646970; font-size: 12px; line-height: 1.45; }
+.spe-block { display: block; margin-top: 12px; }
+.spe-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin: 6px 0; }
+.spe-label { font-weight: 600; font-size: 12px; }
+.spe-check { display: inline-flex; align-items: center; gap: 6px; margin: 6px 0 0; }
+.spe-inline { display: inline-flex; align-items: center; gap: 6px; }
+.spe-box .spe-inline { white-space: nowrap; }
+.spe-box label.spe-inline > input:not([type=checkbox]) { display: inline-block; width: 70px; }
+.spe-box label.spe-inline > input.spe-w-num:not([type=checkbox]) { width: 96px; }
+.spe-box label.spe-inline > input.spe-w-cur:not([type=checkbox]) { width: 72px; text-transform: uppercase; }
+.spe-box .description { margin: 6px 0 0; }
+.spe-foot { padding-top: 12px; }
+@media (max-width: 960px) { .spe-grid2, .spe-grid3 { grid-template-columns: 1fr; } }
+
+.spe-side-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 0 0 12px; }
+.spe-side-stats li { margin: 0; padding: 8px 6px; border: 1px solid #dcdcde; border-radius: 6px; text-align: center; }
+.spe-side-stats b { display: block; font-size: 18px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.spe-side-stats span { display: block; font-size: 11px; color: #646970; }
+.spe-side-links { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.column-spe_when { width: 17%; }
+.column-spe_seats, .column-spe_rsvps { width: 11%; }
+.spe-muted { color: #8c8f94; }
+.spe-badge { display: inline-block; padding: 1px 7px; border-radius: 999px; font-size: 11px; font-weight: 600; line-height: 1.6; background: #f0f0f1; color: #50575e; white-space: nowrap; }
+.spe-badge--live { background: rgba(11, 61, 51, .1); color: #0b3d33; }
+.spe-badge--wait { background: rgba(214, 158, 46, .16); color: #7a5300; }
+
+.spe-settings .spe-status { margin-left: 8px; font-size: 12px; font-weight: 600; }
+.spe-box label.spe-inline > select { display: inline-block; width: auto; }
