@@ -1,13 +1,13 @@
 # Sepo Events
 
 Events for WordPress, with RSVPs, a waitlist, attendee cards with QR codes and a check-in scanner for the door.
-
+Each event gets its own page, and every RSVP is kept in your own database. The people running the event get a dashboard, printable attendee cards and a check-in page. It runs on WordPress alone, with no outside services.
 ![Version](https://img.shields.io/badge/version-1.3.2-0b3d33)
 ![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b)
 ![PHP](https://img.shields.io/badge/PHP-8.1%2B-777bb4)
 ![License](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
 
-Each event gets its own page, and every RSVP is kept in your own database. The people running the event get a dashboard, printable attendee cards and a check-in page. It runs on WordPress alone, with no outside services.
+
 
 ## Contents
 
