@@ -3,12 +3,11 @@
 /**
  * Plugin Name:       Sepo Events
  * Description:       Events with RSVPs, capacity and a waitlist, guest or signed-in registration, paid-event records, an RSVP dashboard with CSV and print exports, printable attendee cards with QR codes, and a door check-in scanner. Runs on WordPress alone.
- * Version:           1.3.2
+ * Version:           1.3.6
  * Requires at least: 6.0
  * Requires PHP:      8.1
  * Author:            Euneolink Solutions
- * Author URI:        https://sepodesk.com
- * Plugin URI:        https://edu.sepodesk.com
+ * Author URI:        https://edu.sepodesk.com/
  * License:           GPL-2.0-or-later
  * Text Domain:       sepo-events
  * Domain Path:       /languages
@@ -29,10 +28,12 @@ if (version_compare(PHP_VERSION, '8.1', '<')) {
     return;
 }
 
-define('SPE_VERSION', '1.3.2');
+define('SPE_VERSION', '1.3.6');
 define('SPE_FILE', __FILE__);
 define('SPE_DIR', plugin_dir_path(__FILE__));
 define('SPE_URL', plugin_dir_url(__FILE__));
+
+require_once __DIR__ . '/includes/admin-skin.php';
 
 spl_autoload_register(static function (string $class): void {
     $prefix = 'SepoEvents\\';

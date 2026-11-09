@@ -69,7 +69,7 @@ final class Tools
         // phpcs:disable WordPress.Security.NonceVerification -- read-only page; the check-in itself is a nonce-checked REST call
         $event = isset($_GET['event']) ? absint($_GET['event']) : 0;
         $code = isset($_GET['code']) ? sanitize_text_field(wp_unslash((string) $_GET['code'])) : '';
-        // phpcs:enable
+        // phpcs:enable WordPress.Security.NonceVerification
         $events = [];
         $soon = array_merge(Event::list(['when' => 'upcoming', 'include_private' => true]), Event::list(['when' => 'past', 'include_private' => true, 'limit' => 20]));
         foreach ($soon as $c) {
@@ -84,7 +84,7 @@ final class Tools
             $event = $live ? (int) reset($live)['id'] : (int) $events[0]['id'];
         }
         header('Content-Type: text/html; charset=utf-8');
-        echo Pages::checkin([ // phpcs:ignore WordPress.Security.EscapeOutput -- full page, escaped inside
+        $page = Pages::checkin([
             'api'    => rest_url(\SepoEvents\Rest::NS),
             'nonce'  => wp_create_nonce('wp_rest'),
             'events' => $events,
@@ -92,6 +92,7 @@ final class Tools
             'code'   => $code,
             'back'   => Screens::dashboardUrl($event > 0 ? ['event' => $event] : []),
         ]);
+        echo $page; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- full page, escaped as it is built.
         exit;
     }
 
@@ -133,7 +134,7 @@ final class Tools
         $type = isset($_GET['type']) ? sanitize_key((string) $_GET['type']) : 'events';
         $event = isset($_GET['event']) ? absint($_GET['event']) : 0;
         $status = isset($_GET['status']) ? sanitize_key((string) $_GET['status']) : '';
-        // phpcs:enable
+        // phpcs:enable WordPress.Security.NonceVerification
         header('Content-Type: text/html; charset=utf-8');
         if ($type === 'rsvps') {
             $r = Reports::rsvps($event, in_array($status, Rsvps::STATUSES, true) ? $status : '', 5000);
@@ -164,13 +165,13 @@ final class Tools
         $type = isset($_GET['type']) ? sanitize_key((string) $_GET['type']) : 'events';
         $event = isset($_GET['event']) ? absint($_GET['event']) : 0;
         $status = isset($_GET['status']) ? sanitize_key((string) $_GET['status']) : '';
-        // phpcs:enable
+        // phpcs:enable WordPress.Security.NonceVerification
 
         nocache_headers();
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename="' . ($type === 'rsvps' ? 'rsvps' : 'events') . '-' . wp_date('Y-m-d') . '.csv"');
-        $out = fopen('php://output', 'w');
-        fwrite($out, "\xEF\xBB\xBF");
+        echo "\xEF\xBB\xBF"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- UTF-8 byte order mark for spreadsheet apps.
+        $out = fopen('php://output', 'w'); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- CSV stream to the browser.
 
         if ($type === 'rsvps') {
             $r = Reports::rsvps($event, in_array($status, Rsvps::STATUSES, true) ? $status : '', 5000);
@@ -209,7 +210,6 @@ final class Tools
                 ]);
             }
         }
-        fclose($out);
         exit;
     }
 

@@ -109,10 +109,14 @@ final class Dashboard
     private static function i18n(): array
     {
         return [
+            /* translators: placeholder values. */
             'events' => __('Events', 'sepo-events'), 'upcomingPast' => __('%1$s upcoming · %2$s past', 'sepo-events'),
+            /* translators: placeholder values. */
             'registrations' => __('Registrations', 'sepo-events'), 'ofEvents' => __('%1$s of %2$s events', 'sepo-events'),
+            /* translators: placeholder values. */
             'seatsTaken' => __('Seats taken', 'sepo-events'), 'leftOf' => __('%1$s left of %2$s', 'sepo-events'), 'noCapped' => __('no capped events', 'sepo-events'),
             'waitlist' => __('Waitlist', 'sepo-events'), 'cancelled' => __('Cancelled', 'sepo-events'), 'checkedIn' => __('Checked in', 'sepo-events'),
+            /* translators: placeholder values. */
             'full' => __('Full events', 'sepo-events'), 'collected' => __('Collected', 'sepo-events'), 'cancelledMoney' => __('%s cancelled', 'sepo-events'),
             'noEvents' => __('No events yet.', 'sepo-events'), 'addEvent' => __('Add an event', 'sepo-events'),
             'colEvent' => __('Event', 'sepo-events'), 'colWhen' => __('When', 'sepo-events'), 'colLocation' => __('Location', 'sepo-events'),
@@ -123,9 +127,13 @@ final class Dashboard
             'noPage' => __('no page', 'sepo-events'), 'private' => __('private', 'sepo-events'), 'draft' => __('draft', 'sepo-events'), 'past' => __('past', 'sepo-events'), 'fullTag' => __('full', 'sepo-events'),
             'cards' => __('Cards', 'sepo-events'), 'scan' => __('Scan', 'sepo-events'), 'edit' => __('Edit', 'sepo-events'), 'rsvps' => __('RSVPs', 'sepo-events'),
             'allEvents' => __('All events', 'sepo-events'), 'none' => __('(none)', 'sepo-events'),
+            /* translators: placeholder values. */
             'noMatch' => __('No RSVPs match the filter.', 'sepo-events'), 'newest' => __('Showing the newest %s. Narrow by event to see the rest.', 'sepo-events'),
+            /* translators: placeholder values. */
             'loadingRsvps' => __('Loading RSVPs…', 'sepo-events'), 'couldNotLoad' => __('%1$s could not be loaded: %2$s', 'sepo-events'), 'someFailed' => __('Some sections could not be loaded.', 'sepo-events'),
+            /* translators: placeholder values. */
             'checkedInTag' => __('checked in', 'sepo-events'), 'notCheckedIn' => __('not checked in', 'sepo-events'), 'paid' => __('Paid %s', 'sepo-events'),
+            /* translators: %s: value. */
             'seatsNoDetails' => __('%s seats, no attendee details recorded', 'sepo-events'), 'attendeeN' => __('Attendee %s', 'sepo-events'),
             'cancel' => __('Cancel', 'sepo-events'), 'delete' => __('Delete', 'sepo-events'), 'card' => __('Card', 'sepo-events'),
             'going' => __('going', 'sepo-events'), 'waitlistS' => __('waitlist', 'sepo-events'), 'cancelledS' => __('cancelled', 'sepo-events'),
@@ -135,23 +143,33 @@ final class Dashboard
             'cancelTitle' => __('Cancel this RSVP?', 'sepo-events'), 'cancelBody' => __('The seat is freed and the record is marked cancelled. It stays in the table.', 'sepo-events'),
             'cancelYes' => __('Cancel RSVP', 'sepo-events'), 'keepIt' => __('Keep it', 'sepo-events'),
             'deleteTitle' => __('Delete this RSVP?', 'sepo-events'), 'deleteBody' => __('This removes the row entirely. The record is gone — no undo, no history.', 'sepo-events'), 'deleteYes' => __('Delete permanently', 'sepo-events'),
+            /* translators: placeholder values. */
             'purgeTitle' => __('Purge every RSVP for this event?', 'sepo-events'), 'purgeBody' => __("Remove every RSVP for \"%s\".\n\nThis cannot be undone.", 'sepo-events'), 'purgeYes' => __('Purge event', 'sepo-events'), 'keepThem' => __('Keep them', 'sepo-events'),
+            /* translators: placeholder values. */
             'cancelledMsg' => __('RSVP cancelled.', 'sepo-events'), 'deletedMsg' => __('RSVP deleted.', 'sepo-events'), 'purgedMsg' => __('Purged %s RSVPs.', 'sepo-events'), 'movedUp' => __('%s moved up from the waitlist.', 'sepo-events'),
+            /* translators: %1$s: value, %2$s: value. */
             'failed' => __('%1$s failed: %2$s', 'sepo-events'), 'selectEvent' => __('Select an event first.', 'sepo-events'),
             'proofChecked' => __('payment checked', 'sepo-events'), 'proofToCheck' => __('proof to check', 'sepo-events'),
             'dProof' => __('Proof of payment', 'sepo-events'), 'noProof' => __('No proof attached.', 'sepo-events'),
             'markChecked' => __('Mark payment as checked', 'sepo-events'), 'unmark' => __('Undo checked', 'sepo-events'),
+            /* translators: %1$s: value, %2$s: value. */
             'checkedBy' => __('Checked by %1$s, %2$s', 'sepo-events'), 'checkedMsg' => __('Payment marked as checked.', 'sepo-events'), 'uncheckedMsg' => __('Payment check removed.', 'sepo-events'),
             'open' => __('Open', 'sepo-events'),
             'delete_' => __('Delete', 'sepo-events'), 'restore' => __('Restore', 'sepo-events'), 'deleteForever' => __('Delete permanently', 'sepo-events'),
             'inBin' => __('in bin', 'sepo-events'), 'removeRsvps' => __('Remove RSVPs', 'sepo-events'),
+            /* translators: %s: value. */
             'trashTitle' => __('Move "%s" to the bin?', 'sepo-events'),
             'trashBody' => __('The event page goes offline and it disappears from the events list. Its RSVPs are kept, and you can restore it from this table or from Events → Bin.', 'sepo-events'),
             'trashYes' => __('Move to bin', 'sepo-events'),
+            /* translators: %s: value. */
             'foreverTitle' => __('Delete "%s" permanently?', 'sepo-events'),
+            /* translators: %s: value. */
             'foreverBody' => __("This deletes the event and its %s RSVPs, with any proof of payment files.\n\nIt cannot be undone.", 'sepo-events'),
+            /* translators: %s: value. */
             'orphanTitle' => __('Remove the RSVPs for "%s"?', 'sepo-events'),
+            /* translators: %s: value. */
             'orphanBody' => __("The event itself is already gone. This removes its %s RSVPs and any proof of payment files.\n\nIt cannot be undone.", 'sepo-events'),
+            /* translators: placeholder values. */
             'trashedMsg' => __('Event moved to the bin.', 'sepo-events'), 'restoredMsg' => __('Event restored.', 'sepo-events'), 'deletedEventMsg' => __('Event deleted with %s RSVPs.', 'sepo-events'),
         ];
     }

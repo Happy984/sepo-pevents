@@ -28,8 +28,9 @@
 .spe-side-stats span { display: block; font-size: 11px; color: #646970; }
 .spe-side-links { display: flex; flex-wrap: wrap; gap: 6px; }
 
-.column-spe_when { width: 17%; }
-.column-spe_seats, .column-spe_rsvps { width: 11%; }
+.post-type-sepo_event .wp-list-table .column-title { width: 20%; }
+.column-spe_when { width: 15%; }
+.column-spe_seats, .column-spe_rsvps { width: 7%; }
 .spe-muted { color: #8c8f94; }
 .spe-badge { display: inline-block; padding: 1px 7px; border-radius: 999px; font-size: 11px; font-weight: 600; line-height: 1.6; background: #f0f0f1; color: #50575e; white-space: nowrap; }
 .spe-badge--live { background: rgba(11, 61, 51, .1); color: #0b3d33; }

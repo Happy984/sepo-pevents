@@ -72,11 +72,14 @@ final class Pages
                 'already'     => __('Already checked in', 'sepo-events'),
                 'checkedIn'   => __('Checked in', 'sepo-events'),
                 'waitlist'    => __('On the waitlist — checked in', 'sepo-events'),
+                /* translators: %s: value. */
                 'alreadyLog'  => __('%s — already in', 'sepo-events'),
+                /* translators: %s: value. */
                 'inLog'       => __('%s — checked in', 'sepo-events'),
                 'guest'       => __('Guest', 'sepo-events'),
                 'byEmail'     => __('found by email', 'sepo-events'),
                 'byPhone'     => __('found by phone', 'sepo-events'),
+                /* translators: %s: value. */
                 'at'          => __('at %s', 'sepo-events'),
             ],
         ]);
@@ -105,8 +108,8 @@ final class Pages
             . '<div class="result" id="result" role="status" aria-live="polite"><p class="name" id="resName"></p><p class="meta" id="resMeta"></p><p class="meta" id="resEvent"></p><span class="tag" id="resTag"></span></div>'
             . '<div class="log"><h2>' . $t(__('Recent scans', 'sepo-events')) . '</h2><ul id="logList"></ul></div>'
             . '</div></div></div>'
-            . '<script>window.SepoCheckin=' . $cfg . ';</script>'
-            . '<script src="' . esc_url(SPE_URL . 'assets/js/checkin.js?ver=' . rawurlencode(Plugin::assetVersion('assets/js/checkin.js'))) . '"></script>'
+            . wp_get_inline_script_tag('window.SepoCheckin=' . $cfg . ';')
+            . wp_get_script_tag(['src' => SPE_URL . 'assets/js/checkin.js?ver=' . rawurlencode(Plugin::assetVersion('assets/js/checkin.js'))])
             . '</body></html>';
     }
 

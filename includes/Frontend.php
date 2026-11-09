@@ -103,13 +103,17 @@ final class Frontend
             // Only signed-in visitors get a nonce: a cached page would carry a stale one for guests.
             'nonce' => is_user_logged_in() ? wp_create_nonce('wp_rest') : '',
             'i18n'  => [
+                /* translators: %d: number. */
                 'attendee'       => __('Attendee %d', 'sepo-events'),
                 'fullName'       => __('Full name', 'sepo-events'),
                 'attendeeName'   => __('Attendee name', 'sepo-events'),
                 'email'          => __('Email', 'sepo-events'),
                 'phone'          => __('Phone', 'sepo-events'),
+                /* translators: %s: value. */
                 'amountPaid'     => __('Amount paid (%s)', 'sepo-events'),
+                /* translators: %d: number. */
                 'totalOne'       => __('Expected total for %d seat', 'sepo-events'),
+                /* translators: %d: number. */
                 'totalMany'      => __('Expected total for %d seats', 'sepo-events'),
                 'reserving'      => __('Reserving…', 'sepo-events'),
                 'cancelling'     => __('Cancelling…', 'sepo-events'),
@@ -128,8 +132,8 @@ final class Frontend
                 'proofChoose'    => __('Choose a file to attach.', 'sepo-events'),
                 /* translators: %s: file name */
                 'proofType'      => __('"%s" is not an accepted file type.', 'sepo-events'),
-                /* translators: 1: file name, then size in MB */
-                'proofSize'      => __('"%s" is larger than %d MB.', 'sepo-events'),
+                /* translators: 1: file name, 2: size in MB */
+                'proofSize'      => __('"%1$s" is larger than %2$d MB.', 'sepo-events'),
                 /* translators: %d: number of files */
                 'proofCount'     => __('Attach at most %d files.', 'sepo-events'),
                 /* translators: %s: file name */
@@ -197,7 +201,7 @@ final class Frontend
         }
         $rendering[$id] = true;
         self::enqueue();
-        $body = (string) apply_filters('the_content', (string) $post->post_content);
+        $body = (string) apply_filters('the_content', (string) $post->post_content); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- core content filter.
         $html = EventView::render($id, ['showTitle' => !in_array(strtolower((string) $a['title']), ['no', '0', 'false'], true), 'body' => $body]);
         unset($rendering[$id]);
         return $html;

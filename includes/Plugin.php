@@ -31,9 +31,6 @@ final class Plugin
 
     public static function boot(): void
     {
-        add_action('init', static function (): void {
-            load_plugin_textdomain('sepo-events', false, dirname(plugin_basename(SPE_FILE)) . '/languages');
-        }, 1);
 
         PostType::hook();
         Frontend::hook();

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+// phpcs:disable WordPress.Security.EscapeOutput.ExceptionNotEscaped -- Exception messages are returned as JSON data or escaped at the point they are displayed.
 
 namespace SepoEvents;
 
@@ -158,11 +159,11 @@ final class Proofs
         $stored = [];
         foreach ($checked as $f) {
             $file = bin2hex(random_bytes(12)) . '.' . $f['ext'];
-            if (!@move_uploaded_file($f['tmp_name'], $dir . '/' . $file) && !@rename($f['tmp_name'], $dir . '/' . $file)) {
+            if (!self::fs()->move($f['tmp_name'], $dir . '/' . $file, true)) {
                 self::remove($eventId, $stored);
                 throw new \RuntimeException(__('A file could not be saved. Please try again.', 'sepo-events'));
             }
-            @chmod($dir . '/' . $file, 0640);
+            self::fs()->chmod($dir . '/' . $file, 0640);
             $stored[] = ['file' => $file, 'name' => $f['clean'], 'type' => $f['type'], 'size' => (int) $f['size'], 'at' => time()];
         }
         return $stored;
@@ -174,7 +175,7 @@ final class Proofs
         foreach ($proofs as $p) {
             $path = self::baseDir() . '/' . $eventId . '/' . basename((string) ($p['file'] ?? ''));
             if (is_file($path)) {
-                @unlink($path);
+                wp_delete_file($path);
             }
         }
     }
@@ -185,10 +186,19 @@ final class Proofs
         if (!is_dir($dir)) {
             return;
         }
-        foreach ((array) glob($dir . '/*') as $f) {
-            @unlink((string) $f);
+        self::fs()->delete($dir, true);
+    }
+
+    /** Direct file-system access for the private folder. */
+    public static function fs(): \WP_Filesystem_Direct
+    {
+        static $fs = null;
+        if ($fs === null) {
+            require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+            require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+            $fs = new \WP_Filesystem_Direct(null);
         }
-        @rmdir($dir);
+        return $fs;
     }
 
     /** The manager's link to one proof file. */
@@ -239,7 +249,7 @@ final class Proofs
         // phpcs:disable WordPress.Security.NonceVerification -- checked above
         $id = isset($_GET['rsvp']) ? sanitize_text_field(wp_unslash((string) $_GET['rsvp'])) : '';
         $i = isset($_GET['file']) ? absint($_GET['file']) : -1;
-        // phpcs:enable
+        // phpcs:enable WordPress.Security.NonceVerification
         $r = Rsvps::get($id);
         $p = $r['proofs'][$i] ?? null;
         $path = $r && is_array($p) ? self::baseDir() . '/' . (int) $r['event_id'] . '/' . basename((string) $p['file']) : '';
@@ -256,7 +266,7 @@ final class Proofs
         if (str_starts_with($type, 'image/')) {
             header("Content-Security-Policy: default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; sandbox");
         }
-        readfile($path);
+        echo self::fs()->get_contents($path); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- file download body.
         exit;
     }
 }

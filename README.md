@@ -1,6 +1,14 @@
 # Sepo Events
 
+By [Euneolink Solutions](https://edu.sepodesk.com/) · Plugin page: [edu.sepodesk.com](https://edu.sepodesk.com/)
+
 Events for WordPress, with RSVPs, a waitlist, attendee cards with QR codes and a check-in scanner for the door.
+
+![Version](https://img.shields.io/badge/version-1.3.6-0b3d33)
+![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b)
+![PHP](https://img.shields.io/badge/PHP-8.1%2B-777bb4)
+![License](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
+
 Each event gets its own page, and every RSVP is kept in your own database. The people running the event get a dashboard, printable attendee cards and a check-in page. It runs on WordPress alone, with no outside services.
 
 <p align="center">
@@ -14,14 +22,6 @@ Each event gets its own page, and every RSVP is kept in your own database. The p
   <br />
   <strong>Every contribution makes a difference. Thank you for supporting our work!</strong>
 </p>
-
-
-![Version](https://img.shields.io/badge/version-1.3.2-0b3d33)
-![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-21759b)
-![PHP](https://img.shields.io/badge/PHP-8.1%2B-777bb4)
-![License](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
-
-
 
 ## Contents
 
@@ -128,10 +128,10 @@ Each event gets its own page, and every RSVP is kept in your own database. The p
 
 ## Requirements
 
-| | Minimum |
-|---|---|
-| WordPress | 6.0 |
-| PHP | 8.1 |
+|           | Minimum |
+| --------- | ------- |
+| WordPress | 6.0     |
+| PHP       | 8.1     |
 
 ## Installation
 
@@ -149,43 +149,43 @@ Each event gets its own page, and every RSVP is kept in your own database. The p
 3. Go to **Plugins** and activate **Sepo Events**.
 
 > [!NOTE]
-> GitHub's **Code → Download ZIP** names the folder after the branch, for example `sepo-pevents-main`. Rename it to `sepo-events` before uploading.
+> GitHub's **Code → Download ZIP** names the folder after the branch, for example `sepo-events-main`. Rename it to `sepo-events` before uploading.
 
 ## Getting started
 
 1. Go to **Events → Settings**. Set the accent colour, the emails and the largest file size for proof of payment.
 2. Go to **Events → Add event**. Here is what each part of the editor becomes:
 
-   | Editor field | On the event page |
-   |---|---|
-   | Title | The event name |
-   | Excerpt | The one-line description |
-   | Main text | The details |
-   | Featured image | The banner |
+   | Editor field   | On the event page        |
+   | -------------- | ------------------------ |
+   | Title          | The event name           |
+   | Excerpt        | The one-line description |
+   | Main text      | The details              |
+   | Featured image | The banner               |
 
 3. Fill in the **Event details** box and publish.
 4. On the day, open **Events → RSVPs**, choose the event, and use **Cards** and **Check-in**.
 
 ## Shortcodes, blocks and widgets
 
-| Shortcode | What it shows |
-|---|---|
-| `[sepo_events]` | The events list. |
+| Shortcode               | What it shows                                                       |
+| ----------------------- | ------------------------------------------------------------------- |
+| `[sepo_events]`         | The events list.                                                    |
 | `[sepo_event id="123"]` | One event with its RSVP form. Add `title="no"` to hide its heading. |
-| `[sepo_event_rsvps]` | The RSVP dashboard. Only event managers see it. |
+| `[sepo_event_rsvps]`    | The RSVP dashboard. Only event managers see it.                     |
 
 `[sepo_events]` options:
 
-| Option | Values |
-|---|---|
-| `show` | `all`, `upcoming` or `past` |
-| `per_page` | Events per page, default `9` |
-| `view` | `grid` or `list` |
+| Option     | Values                                     |
+| ---------- | ------------------------------------------ |
+| `show`     | `all`, `upcoming` or `past`                |
+| `per_page` | Events per page, default `9`               |
+| `view`     | `grid` or `list`                           |
 | `category` | Category slugs, such as `workshops,sports` |
-| `toolbar` | `no` hides search and filters |
-| `limit` | Most events to show |
-| `past` | Most past events to show |
-| `title` | A heading, such as `Coming up` |
+| `toolbar`  | `no` hides search and filters              |
+| `limit`    | Most events to show                        |
+| `past`     | Most past events to show                   |
+| `title`    | A heading, such as `Coming up`             |
 
 The plugin also includes:
 
@@ -234,26 +234,26 @@ No. It needs a connection to the site to record each check-in.
 
 ### Actions
 
-| Action | Arguments |
-|---|---|
-| `sepo_events_rsvp` | `( array $record, array $event, bool $created )` after an RSVP is saved |
-| `sepo_events_rsvp_cancelled` | `( array $record, array $event )` |
-| `sepo_events_rsvp_promoted` | `( array $record, array $event )` when a waiting registration moves up |
-| `sepo_events_rsvp_deleted` | `( string $id )` |
-| `sepo_events_rsvps_purged` | `( int $eventId, int $removed )` |
-| `sepo_events_checked_in` | `( array $result, int $eventId )` |
-| `sepo_events_proof_added` | `( array $record, array $event, array $files )` |
-| `sepo_events_payment_verified` | `( string $id, bool $verified )` |
+| Action                         | Arguments                                                               |
+| ------------------------------ | ----------------------------------------------------------------------- |
+| `sepo_events_rsvp`             | `( array $record, array $event, bool $created )` after an RSVP is saved |
+| `sepo_events_rsvp_cancelled`   | `( array $record, array $event )`                                       |
+| `sepo_events_rsvp_promoted`    | `( array $record, array $event )` when a waiting registration moves up  |
+| `sepo_events_rsvp_deleted`     | `( string $id )`                                                        |
+| `sepo_events_rsvps_purged`     | `( int $eventId, int $removed )`                                        |
+| `sepo_events_checked_in`       | `( array $result, int $eventId )`                                       |
+| `sepo_events_proof_added`      | `( array $record, array $event, array $files )`                         |
+| `sepo_events_payment_verified` | `( string $id, bool $verified )`                                        |
 
 ### Filters
 
-| Filter | Purpose |
-|---|---|
-| `sepo_events_proof_mimes` | Sets the accepted proof file types. |
-| `sepo_events_manage_capability` | Sets the capability for the dashboard and door tools. Default `edit_others_posts`. |
-| `sepo_events_ip` | Gives the visitor's IP for the guest rate limit, behind a proxy. |
-| `sepo_events_wide` | Return `true` to use the theme's wide width (block themes). |
-| `sepo_events_show_title_on_event_page` | Return `true` to show the event heading inside the content too. |
+| Filter                                 | Purpose                                                                            |
+| -------------------------------------- | ---------------------------------------------------------------------------------- |
+| `sepo_events_proof_mimes`              | Sets the accepted proof file types.                                                |
+| `sepo_events_manage_capability`        | Sets the capability for the dashboard and door tools. Default `edit_others_posts`. |
+| `sepo_events_ip`                       | Gives the visitor's IP for the guest rate limit, behind a proxy.                   |
+| `sepo_events_wide`                     | Return `true` to use the theme's wide width (block themes).                        |
+| `sepo_events_show_title_on_event_page` | Return `true` to show the event heading inside the content too.                    |
 
 ### REST API
 
@@ -267,26 +267,53 @@ The REST API is under `/wp-json/sepo-events/v1/`:
 
 ## Changelog
 
+### 1.3.6
+
+- The plugin is by Euneolink Solutions. Its plugin page and author page are edu.sepodesk.com.
+
+### 1.3.5
+
+- Readme: screenshots and their captions for the plugin directory.
+
+### 1.3.4
+
+- Admin screens: settings shown as cards, lists in a rounded frame, rounded fields and buttons, pill-shaped tabs and filters, and notices on tinted backgrounds.
+- Events list: wider title column, so each event's row is shorter.
+
+### 1.3.3
+
+- Proof-of-payment files are stored and served through the WordPress file-system API.
+- The check-in page loads its script with the WordPress script helpers.
+- Numbered placeholders in the file-size message, so translations can reorder them.
+- Passes the WordPress Plugin Check: translator comments on every string with placeholders, escaped output, sanitised request data and documented database access to the plugin's own tables.
+- Tested up to WordPress 7.1.
+
 ### 1.3.2
+
 - The **When and where** box has a solid background taken from the page behind it, or the theme's base colour.
 - The box stays in view only when it has its own column, and clears fixed theme headers and the admin bar.
 
 ### 1.3.1
+
 - The events list and event pages sit centred in the theme's content column.
 - In a narrow column, the **When and where** box comes first.
 
 ### 1.3.0
+
 - Events list toolbar: search, Upcoming / Past / All, category and price filters, grid or list layout, and pages.
 - Event categories.
 
 ### 1.2.0
+
 - Delete, restore and permanently delete events from the RSVP dashboard.
 - Event cards show the cover image and a large date, with larger text throughout.
 
 ### 1.1.0
+
 - Proof of payment: people attach images, PDFs or Word documents when they RSVP or later. Managers open them and mark payments as checked.
 
 ### 1.0.0
+
 - First release.
 
 ## License

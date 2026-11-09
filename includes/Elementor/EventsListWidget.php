@@ -77,7 +77,7 @@ final class EventsListWidget extends Widget_Base
     protected function render(): void
     {
         $s = $this->get_settings_for_display();
-        echo Frontend::listShortcode([ // phpcs:ignore WordPress.Security.EscapeOutput -- built from escaped parts
+        $html = Frontend::listShortcode([
             'show'  => (string) ($s['show'] ?? 'all'),
             'limit' => (int) ($s['limit'] ?? 0),
             'title'    => (string) ($s['title'] ?? ''),
@@ -86,5 +86,6 @@ final class EventsListWidget extends Widget_Base
             'toolbar'  => ($s['toolbar'] ?? 'yes') === 'yes' ? 'yes' : 'no',
             'category' => (string) ($s['category'] ?? ''),
         ]);
+        echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from escaped parts.
     }
 }

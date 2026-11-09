@@ -12,7 +12,7 @@
   function esc(s) {
     return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
-  function fmt(s, v) { return String(s || '').replace(/%[ds]/, v); }
+  function fmt(s, v) { return String(s || '').replace(/%(?:\d\$)?[ds]/, v); }
 
   // ------------------------------------------------------------ dark mode
 
