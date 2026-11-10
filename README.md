@@ -149,7 +149,7 @@ Each event gets its own page, and every RSVP is kept in your own database. The p
 3. Go to **Plugins** and activate **Sepo Events**.
 
 > [!NOTE]
-> GitHub's **Code → Download ZIP** names the folder after the branch, for example `sepo-pevents-main`. Rename it to `sepo-events` before uploading.
+> GitHub's **Code → Download ZIP** names the folder after the branch, for example `sepo-events-main`. Rename it to `sepo-events` before uploading.
 
 ## Getting started
 
