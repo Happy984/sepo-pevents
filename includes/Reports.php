@@ -142,6 +142,9 @@ final class Reports
             $r['proof_files'] = Proofs::listFor($r);
             $checker = $r['verified_by'] > 0 ? get_userdata((int) $r['verified_by']) : false;
             $r['verified_by_name'] = $checker ? (string) $checker->display_name : '';
+            $r['event_paid'] = $c ? !empty($c['is_paid']) : false;
+            $r['ticket_ready'] = $c ? Tickets::ready($r, $c) : false;
+            $r['ticket_sent_at'] = Tickets::sentAt((string) $r['id']);
             unset($r['proofs']);
             $rows[] = $r;
         }

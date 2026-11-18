@@ -61,7 +61,11 @@ final class Mail
             /* translators: %d: number of seats */
             $lines[] = sprintf(_n('%d seat', '%d seats', (int) $record['guests'], 'sepo-events'), (int) $record['guests']);
         }
-        if (in_array($kind, ['going', 'promoted'], true) && $record['checkin_code'] !== '') {
+        if (in_array($kind, ['going', 'promoted'], true) && Tickets::waitingForPayment($record, $c)) {
+            $lines[] = '';
+            $lines[] = __('Your ticket with its QR code will be emailed to you once your payment has been checked.', 'sepo-events');
+        }
+        if (in_array($kind, ['going', 'promoted'], true) && Tickets::ready($record, $c)) {
             $lines[] = '';
             /* translators: %s: check-in code */
             $lines[] = sprintf(__('Your check-in code: %s', 'sepo-events'), $record['checkin_code']);
@@ -70,6 +74,8 @@ final class Mail
                     $lines[] = sprintf('%s: %s', $a['name'], $a['code']);
                 }
             }
+            /* translators: %s: link */
+            $lines[] = sprintf(__('Your ticket with QR codes: %s', 'sepo-events'), Tickets::url($record));
         }
         $lines[] = '';
         if ($kind !== 'cancelled') {

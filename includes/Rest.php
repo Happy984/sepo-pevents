@@ -22,7 +22,9 @@ defined('ABSPATH') || exit;
  *   GET  /admin/rsvps     RSVP rows, filtered                  managers
  *   POST /admin/delete    remove one RSVP, or purge an event   managers
  *   POST /admin/checkin   check one person in                  managers
- *   POST /admin/verify    mark a payment as checked            managers
+ *   POST /admin/verify    mark a payment as checked; for a     managers
+ *                         paid event this emails the ticket
+ *   POST /admin/ticket    email a ticket again                 managers
  *   POST /admin/event     move an event to the bin, restore    managers who may
  *                         it, or delete it for good            delete the event
  *
@@ -50,6 +52,7 @@ final class Rest
         register_rest_route(self::NS, '/proof', ['methods' => WP_REST_Server::CREATABLE, 'callback' => [self::class, 'proof'], 'permission_callback' => '__return_true']);
         register_rest_route(self::NS, '/admin/event', ['methods' => WP_REST_Server::CREATABLE, 'callback' => [self::class, 'event'], 'permission_callback' => $manager]);
         register_rest_route(self::NS, '/admin/verify', ['methods' => WP_REST_Server::CREATABLE, 'callback' => [self::class, 'verify'], 'permission_callback' => $manager]);
+        register_rest_route(self::NS, '/admin/ticket', ['methods' => WP_REST_Server::CREATABLE, 'callback' => [self::class, 'ticket'], 'permission_callback' => $manager]);
         register_rest_route(self::NS, '/upcoming', ['methods' => WP_REST_Server::READABLE, 'callback' => [self::class, 'upcoming'], 'permission_callback' => '__return_true']);
         register_rest_route(self::NS, '/admin/stats', ['methods' => WP_REST_Server::READABLE, 'callback' => [self::class, 'stats'], 'permission_callback' => $manager]);
         register_rest_route(self::NS, '/admin/rsvps', ['methods' => WP_REST_Server::READABLE, 'callback' => [self::class, 'rsvps'], 'permission_callback' => $manager]);
@@ -327,7 +330,34 @@ final class Rest
         }
         Rsvps::verify($eventId, $id, $on);
         do_action('sepo_events_payment_verified', $id, $on);
-        return self::ok(['verified' => $on]);
+        $sent = '';
+        if ($on) {
+            $r = Rsvps::findById($eventId, $id);
+            if ($r) {
+                $sent = Tickets::send($r, Event::config($eventId));
+            }
+        }
+        return self::ok(['verified' => $on, 'ticket_sent_to' => $sent]);
+    }
+
+    /** Email a ticket again, for a guest who lost it. */
+    public static function ticket(WP_REST_Request $req)
+    {
+        $eventId = absint($req->get_param('event'));
+        $id = sanitize_text_field((string) $req->get_param('id'));
+        $r = $eventId > 0 && $id !== '' ? Rsvps::findById($eventId, $id) : null;
+        if (!$r) {
+            return self::error(__('No RSVP matches that reference.', 'sepo-events'), 404);
+        }
+        $c = Event::config($eventId);
+        if (!Tickets::ready($r, $c)) {
+            return self::error(Tickets::waitingForPayment($r, $c) ? __('Mark the payment as checked first; the ticket is sent then.', 'sepo-events') : __('This registration has no ticket: it is not a confirmed seat.', 'sepo-events'), 409);
+        }
+        $to = Tickets::send($r, $c);
+        if ($to === '') {
+            return self::error(__('The ticket could not be emailed. Check that the registration has an email address and that the site can send email.', 'sepo-events'), 500);
+        }
+        return self::ok(['ticket_sent_to' => $to]);
     }
 
     public static function upcoming(WP_REST_Request $req): WP_REST_Response
@@ -415,13 +445,17 @@ final class Rest
         if (!$post || $post->post_type !== PostType::TYPE) {
             return self::error(__('Event not found.', 'sepo-events'), 404);
         }
-        $r = Rsvps::checkIn($eventId, $code);
+        $c = Event::config($post);
+        $r = Rsvps::checkIn($eventId, $code, !empty($c['is_paid']), rest_sanitize_boolean($req->get_param('force')));
         if (!$r['found']) {
             return self::error(__('That code, email or phone was not recognised for this event.', 'sepo-events'), 404);
         }
         if ($r['refused'] === 'cancelled') {
             /* translators: %s: person's name */
             return self::error(sprintf(__('%s cancelled their RSVP. They are not checked in.', 'sepo-events'), $r['person']['name'] !== '' ? $r['person']['name'] : __('This guest', 'sepo-events')), 409);
+        }
+        if ($r['refused'] === 'unpaid') {
+            return new WP_Error('sepo_events_unpaid', sprintf(/* translators: %s: person's name */ __('The payment for %s has not been checked yet, so they have no ticket. Check the payment in the dashboard, or let them in anyway.', 'sepo-events'), $r['person']['name'] !== '' ? $r['person']['name'] : __('this guest', 'sepo-events')), ['status' => 409, 'person' => $r['person']]);
         }
         if (!$r['already']) {
             do_action('sepo_events_checked_in', $r, $eventId);
@@ -436,6 +470,9 @@ final class Rest
     {
         foreach ($promoted as $r) {
             Mail::confirmation($r, $c, 'promoted');
+            if (!empty($c['is_paid'])) {
+                Tickets::send($r, $c);
+            }
             do_action('sepo_events_rsvp_promoted', $r, $c);
         }
     }

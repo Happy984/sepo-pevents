@@ -345,7 +345,7 @@
       if (row.checkin_code) { h += line(T.dCode, '<code>' + esc(row.checkin_code) + '</code>'); }
       h += line(T.dRegChecked, esc(row.checkins && row.checkins.primary ? T.yes : T.no));
       var proofs = row.proof_files || [];
-      if (proofs.length || isFinite(amt) && amt > 0) {
+      if (proofs.length || isFinite(amt) && amt > 0 || row.event_paid) {
         h += '<div class="eva-detail-head">' + esc(T.dProof) + '</div>';
         if (!proofs.length) { h += '<p class="eva-cell-sub">' + esc(T.noProof) + '</p>'; }
         h += '<div class="eva-proofs">' + proofs.map(function (p) {
@@ -353,12 +353,21 @@
             (p.image ? '<img src="' + esc(p.url) + '" alt="" loading="lazy">' : '<span class="eva-proof-ext">' + esc((p.name.split('.').pop() || '').toUpperCase()) + '</span>') +
             '<span class="eva-proof-name">' + esc(p.name) + '</span><span class="eva-cell-sub">' + esc(p.size) + '</span></a>';
         }).join('') + '</div>';
-        if (proofs.length) {
+        if (proofs.length || row.event_paid) {
           if (row.verified_at) {
             h += '<p class="eva-verified">' + esc(fmt(T.checkedBy, row.verified_by_name || '—', fmtTime(row.verified_at))) + '</p>';
           }
           h += '<div class="eva-detail-actions"><button type="button" class="eva-btn ' + (row.verified_at ? '' : 'eva-btn--primary') + '" data-eva-verify="' + esc(row.id) + '" data-eva-event="' + esc(row.event_id) + '" data-eva-on="' + (row.verified_at ? '0' : '1') + '">' +
             esc(row.verified_at ? T.unmark : T.markChecked) + '</button></div>';
+        }
+      }
+      if (row.event_paid && row.status === 'going') {
+        h += '<div class="eva-detail-head">' + esc(T.dTicket) + '</div>';
+        if (!row.ticket_ready) {
+          h += '<p class="eva-cell-sub">' + esc(T.ticketWaiting) + '</p>';
+        } else {
+          h += '<p class="eva-cell-sub">' + esc(row.ticket_sent_at ? fmt(T.ticketSentAt, fmtTime(row.ticket_sent_at)) : T.ticketNotSent) + '</p>';
+          h += '<div class="eva-detail-actions"><button type="button" class="eva-btn" data-eva-ticket="' + esc(row.id) + '" data-eva-event="' + esc(row.event_id) + '">' + esc(row.ticket_sent_at ? T.sendAgain : T.sendTicket) + '</button></div>';
         }
       }
       var list = Array.isArray(row.attendees) ? row.attendees : [];
@@ -387,12 +396,33 @@
       var on = v.getAttribute('data-eva-on') === '1';
       v.disabled = true;
       req('/admin/verify', null, { method: 'POST', body: { event: Number(v.getAttribute('data-eva-event')), id: v.getAttribute('data-eva-verify'), verified: on } })
-        .then(function () {
-          show(on ? T.checkedMsg : T.uncheckedMsg, '');
+        .then(function (res) {
+          var to = res && res.ticket_sent_to;
+          show(on ? (to ? fmt(T.ticketSentMsg, to) : (rowPaid(v.getAttribute('data-eva-verify')) ? T.ticketNoMail : T.checkedMsg)) : T.uncheckedMsg, on && !to && rowPaid(v.getAttribute('data-eva-verify')) ? 'error' : '');
           var id = v.getAttribute('data-eva-verify');
           return loadRsvps().then(function () { openDetail(id); });
         })
         .catch(function (err) { show(err.message, 'error'); v.disabled = false; });
+    });
+    function rowPaid(id) {
+      var paid = false;
+      lastRows.forEach(function (r) { if (r.id === id && r.event_paid && r.status === 'going') { paid = true; } });
+      return paid;
+    }
+    detailModal.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('[data-eva-ticket]') : null;
+      if (!t) { return; }
+      var label = t.textContent;
+      t.disabled = true;
+      t.setAttribute('aria-busy', 'true');
+      t.textContent = T.sending || label;
+      req('/admin/ticket', null, { method: 'POST', body: { event: Number(t.getAttribute('data-eva-event')), id: t.getAttribute('data-eva-ticket') } })
+        .then(function (res) {
+          show(fmt(T.ticketAgainMsg, (res && res.ticket_sent_to) || ''), '');
+          var id = t.getAttribute('data-eva-ticket');
+          return loadRsvps().then(function () { openDetail(id); });
+        })
+        .catch(function (err) { show(err.message, 'error'); t.disabled = false; t.removeAttribute('aria-busy'); t.textContent = label; });
     });
     detailModal.addEventListener('click', function (e) { if (e.target === detailModal) { closeDetail(); } });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !detailModal.hidden) { closeDetail(); } });

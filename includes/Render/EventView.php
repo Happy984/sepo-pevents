@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace SepoEvents\Render;
 
-use SepoEvents\Admin\Tools;
 use SepoEvents\Event;
 use SepoEvents\Plugin;
 use SepoEvents\Proofs;
 use SepoEvents\Rsvps;
+use SepoEvents\Tickets;
 use SepoEvents\Tools\Qr;
 
 defined('ABSPATH') || exit;
@@ -135,11 +135,17 @@ final class EventView
                     <p class="ev-muted"><?php esc_html_e('No further details yet.', 'sepo-events'); ?></p>
                 <?php endif; ?>
                 <?php if ($details !== []) : ?>
-                    <table class="ev-spec"><tbody>
+                    <dl class="ev-facts">
                         <?php foreach ($details as $row) : ?>
-                            <tr><th scope="row"><?php echo esc_html((string) $row['label']); ?></th><td><?php echo esc_html((string) $row['note']); ?></td></tr>
+                            <div class="ev-fact">
+                                <span class="ev-fact-icon" aria-hidden="true"><?php echo Icons::get(self::detailIcon((string) $row['label']), 24); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+                                <div class="ev-fact-text">
+                                    <dt><?php echo esc_html((string) $row['label']); ?></dt>
+                                    <dd><?php echo esc_html((string) $row['note']); ?></dd>
+                                </div>
+                            </div>
                         <?php endforeach; ?>
-                    </tbody></table>
+                    </dl>
                 <?php endif; ?>
             </div>
 
@@ -259,56 +265,108 @@ final class EventView
         </div>
 
         <aside class="ev-aside">
-            <div class="ev-panel-box">
-                <h3><?php echo esc_html($isLive ? __('Happening now', 'sepo-events') : __('When and where', 'sepo-events')); ?></h3>
+            <div class="ev-panel-box ev-when">
+                <h3 class="ev-when-kick"><?php echo esc_html($isLive ? __('Happening now', 'sepo-events') : __('When and where', 'sepo-events')); ?></h3>
                 <?php if ($c['starts_utc'] !== null) : ?>
-                    <p class="ev-aside-when"><?php echo esc_html($day); ?></p>
-                    <p class="ev-aside-sub">
-                        <?php
-                        $sub = [];
-                        if ($c['all_day']) {
-                            $sub[] = $endDay !== '' && $endDay !== $day ? __('Until', 'sepo-events') . ' ' . $endDay : __('All day', 'sepo-events');
-                        } else {
-                            $sub[] = $startAt . ($endAt !== '' ? ' – ' . $endAt : '');
-                            if ($duration !== '') {
-                                $sub[] = $duration;
-                            }
-                        }
-                        $sub[] = $tz;
-                        echo esc_html(implode(' · ', array_filter($sub)));
-                        ?>
-                    </p>
+                    <div class="ev-when-head">
+                        <div class="ev-datebox" aria-hidden="true">
+                            <span class="ev-datebox-m"><?php echo esc_html(Event::local($c['starts_utc'], $tz, 'M')); ?></span>
+                            <span class="ev-datebox-d"><?php echo esc_html(Event::local($c['starts_utc'], $tz, 'j')); ?></span>
+                            <span class="ev-datebox-w"><?php echo esc_html(Event::local($c['starts_utc'], $tz, 'D')); ?></span>
+                        </div>
+                        <div class="ev-when-dates">
+                            <p class="ev-aside-when"><?php echo esc_html($day); ?></p>
+                            <p class="ev-aside-sub">
+                                <?php
+                                $sub = [];
+                                if ($c['all_day']) {
+                                    $sub[] = $endDay !== '' && $endDay !== $day ? __('Until', 'sepo-events') . ' ' . Event::local($c['ends_utc'], $tz, 'l j F') : __('All day', 'sepo-events');
+                                } else {
+                                    if ($endDay !== '' && $endDay !== $day) {
+                                        /* translators: 1: start time, 2: end day, short, such as Tue 8 Dec, 3: end time */
+                                        $sub[] = sprintf(__('%1$s – %2$s, %3$s', 'sepo-events'), $startAt, Event::local($c['ends_utc'], $tz, 'D j M'), $endAt);
+                                    } else {
+                                        $sub[] = $startAt . ($endAt !== '' ? ' – ' . $endAt : '') . ($duration !== '' ? ' · ' . $duration : '');
+                                    }
+                                }
+                                $sub[] = self::tzLabel($tz);
+                                // One fact to a line, so a narrow box reads cleanly.
+                                foreach (array_filter($sub) as $line) {
+                                    echo '<span class="ev-when-line">' . esc_html($line) . '</span>';
+                                }
+                                ?>
+                            </p>
+                        </div>
+                    </div>
                 <?php else : ?>
-                    <p class="ev-aside-sub"><?php esc_html_e('Date to be announced.', 'sepo-events'); ?></p>
+                    <p class="ev-aside-sub ev-when-tba"><?php esc_html_e('Date to be announced.', 'sepo-events'); ?></p>
                 <?php endif; ?>
-                <?php if ($c['location'] !== '') : ?>
-                    <p class="ev-aside-loc"><?php echo Icons::get('pin'); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html($c['location']); ?></span></p>
+                <div class="ev-when-rows">
+                    <?php if ($c['location'] !== '') : ?>
+                        <div class="ev-when-row">
+                            <span class="ev-fact-icon" aria-hidden="true"><?php echo Icons::get('pin', 22); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+                            <p><small><?php esc_html_e('Where', 'sepo-events'); ?></small><b><?php echo esc_html($c['location']); ?></b></p>
+                        </div>
+                    <?php endif; ?>
+                    <div class="ev-when-row">
+                        <span class="ev-fact-icon" aria-hidden="true"><?php echo Icons::get($c['is_paid'] ? 'card' : 'ticket', 22); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+                        <p><small><?php esc_html_e('Price', 'sepo-events'); ?></small><b><?php
+                            /* translators: %s: price */
+                            echo esc_html($c['is_paid'] ? sprintf(__('%s per seat', 'sepo-events'), Event::money($c['price'], $c['currency'])) : __('Free entry', 'sepo-events'));
+                        ?></b></p>
+                    </div>
+                </div>
+                <div class="ev-seats">
+                    <p class="ev-seats-top">
+                        <b><?php
+                        if ($c['capacity'] > 0) {
+                            /* translators: 1: seats left, 2: capacity */
+                            echo esc_html(sprintf(_n('%1$d of %2$d seat left', '%1$d of %2$d seats left', $c['capacity'], 'sepo-events'), (int) $n['seats_left'], $c['capacity']));
+                        } else {
+                            /* translators: %d: seats */
+                            echo esc_html(sprintf(_n('%d seat taken', '%d seats taken', $seats, 'sepo-events'), $seats));
+                        }
+                        ?></b>
+                        <span><?php
+                        if ($n['waitlist'] > 0) {
+                            /* translators: %d: people waiting */
+                            echo esc_html(sprintf(__('%d on the waitlist', 'sepo-events'), (int) $n['waitlist']));
+                        } elseif ($c['capacity'] > 0) {
+                            /* translators: %d: seats taken */
+                            echo esc_html(sprintf(_n('%d taken', '%d taken', $seats, 'sepo-events'), $seats));
+                        }
+                        ?></span>
+                    </p>
+                    <?php if ($c['capacity'] > 0) : ?>
+                        <?php $pct = (int) round(min(100, max(0, $seats / max(1, $c['capacity']) * 100))); ?>
+                        <div class="ev-seats-bar" role="progressbar" aria-label="<?php esc_attr_e('Seats taken', 'sepo-events'); ?>" aria-valuemin="0" aria-valuemax="<?php echo (int) $c['capacity']; ?>" aria-valuenow="<?php echo (int) min($seats, $c['capacity']); ?>"><i style="width:<?php echo (int) $pct; ?>%"></i></div>
+                    <?php endif; ?>
+                </div>
+                <?php
+                // One action only: the way to register, which opens the RSVP form.
+                $action = '';
+                if ($mine) {
+                    $action = __('View your RSVP', 'sepo-events');
+                } elseif (!$isOver && !$c['closed'] && !$c['private']) {
+                    $action = $isFull ? __('Join the waitlist', 'sepo-events') : __('RSVP now', 'sepo-events');
+                }
+                ?>
+                <?php if ($action !== '') : ?>
+                    <a class="ev-btn ev-btn--primary ev-btn--block ev-when-go" href="#rsvp" data-ev-goto="rsvps"><?php echo Icons::get('ticket', 18); // phpcs:ignore WordPress.Security.EscapeOutput ?><?php echo esc_html($action); ?></a>
+                <?php elseif ($isOver) : ?>
+                    <p class="ev-when-note"><?php esc_html_e('This event has finished.', 'sepo-events'); ?></p>
+                <?php elseif ($c['closed']) : ?>
+                    <p class="ev-when-note"><?php esc_html_e('Registration is closed.', 'sepo-events'); ?></p>
                 <?php endif; ?>
-                <p class="ev-aside-price"><?php echo Icons::get($c['is_paid'] ? 'card' : 'ticket'); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php
-                    /* translators: %s: price */
-                    echo esc_html($c['is_paid'] ? sprintf(__('%s per seat', 'sepo-events'), Event::money($c['price'], $c['currency'])) : __('Free entry', 'sepo-events'));
-                ?></span></p>
-                <div class="ev-aside-divider"></div>
-                <p class="ev-aside-sub ev-aside-seats">
-                    <?php
-                    if ($c['capacity'] > 0) {
-                        /* translators: 1: seats left, 2: capacity */
-                        echo esc_html(sprintf(_n('%1$d of %2$d seat left.', '%1$d of %2$d seats left.', $c['capacity'], 'sepo-events'), (int) $n['seats_left'], $c['capacity']));
-                    } else {
-                        /* translators: %d: seats */
-                        echo esc_html(sprintf(_n('%d seat taken.', '%d seats taken.', $seats, 'sepo-events'), $seats));
-                    }
-                    if ($n['waitlist'] > 0) {
-                        /* translators: %d: people waiting */
-                        echo ' ' . esc_html(sprintf(__('%d on the waitlist.', 'sepo-events'), (int) $n['waitlist']));
-                    }
-                    ?>
-                </p>
-                <?php if ($c['starts_utc'] !== null && !$c['private']) : ?>
-                    <a class="ev-btn ev-btn--block" href="<?php echo esc_url(Event::icsUrl($id)); ?>"><?php echo Icons::get('calendar'); // phpcs:ignore WordPress.Security.EscapeOutput ?><?php esc_html_e('Add to calendar', 'sepo-events'); ?></a>
-                <?php endif; ?>
-                <?php if ($canManage) : ?>
-                    <a class="ev-btn ev-btn--block ev-btn--quiet" href="<?php echo esc_url(\SepoEvents\Admin\Screens::dashboardUrl(['event' => $id])); ?>"><?php esc_html_e('Manage RSVPs', 'sepo-events'); ?></a>
+                <?php if (($c['starts_utc'] !== null && !$c['private'] && !$isOver) || $canManage) : ?>
+                    <p class="ev-when-links">
+                        <?php if ($c['starts_utc'] !== null && !$c['private'] && !$isOver) : ?>
+                            <a href="<?php echo esc_url(Event::icsUrl($id)); ?>"><?php echo Icons::get('calendar'); // phpcs:ignore WordPress.Security.EscapeOutput ?><?php esc_html_e('Add to calendar', 'sepo-events'); ?></a>
+                        <?php endif; ?>
+                        <?php if ($canManage) : ?>
+                            <a href="<?php echo esc_url(\SepoEvents\Admin\Screens::dashboardUrl(['event' => $id])); ?>"><?php echo Icons::get('list'); // phpcs:ignore WordPress.Security.EscapeOutput ?><?php esc_html_e('Manage RSVPs', 'sepo-events'); ?></a>
+                        <?php endif; ?>
+                    </p>
                 <?php endif; ?>
             </div>
         </aside>
@@ -330,6 +388,58 @@ final class EventView
         return (string) ob_get_clean();
     }
 
+    /** A time zone as people say it: "Lusaka time (CAT)", or "UTC". */
+    private static function tzLabel(string $tz): string
+    {
+        if ($tz === '' || strtoupper($tz) === 'UTC') {
+            return 'UTC';
+        }
+        try {
+            $abbr = (new \DateTimeImmutable('now', new \DateTimeZone($tz)))->format('T');
+        } catch (\Exception $e) {
+            return $tz;
+        }
+        if (!str_contains($tz, '/')) {
+            return $tz;
+        }
+        $city = str_replace('_', ' ', substr($tz, (int) strrpos($tz, '/') + 1));
+        // Some zones have no letters, only an offset such as +02.
+        $abbr = preg_match('/^[+-]/', $abbr) ? 'UTC' . $abbr : $abbr;
+        /* translators: 1: a city, such as Lusaka, 2: a time zone, such as CAT */
+        return sprintf(__('%1$s time (%2$s)', 'sepo-events'), $city, $abbr);
+    }
+
+    /** An icon for an event detail, from the words in its label. */
+    private static function detailIcon(string $label): string
+    {
+        $l = mb_strtolower($label);
+        $map = [
+            'shirt'   => ['dress', 'wear', 'attire', 'cloth', 'uniform'],
+            'parking' => ['park'],
+            'food'    => ['food', 'meal', 'lunch', 'dinner', 'breakfast', 'snack', 'refresh', 'drink', 'catering'],
+            'globe'   => ['language', 'translat'],
+            'users'   => ['age', 'kids', 'child', 'family', 'audience', 'who'],
+            'access'  => ['access', 'wheelchair'],
+            'wifi'    => ['wifi', 'wi-fi', 'internet'],
+            'bag'     => ['bring', 'pack', 'what to'],
+            'phone'   => ['contact', 'phone', 'call'],
+            'ticket'  => ['ticket', 'entry', 'admission', 'price', 'cost', 'fee'],
+            'clock'   => ['time', 'start', 'door', 'arriv', 'schedule', 'duration'],
+            'pin'     => ['venue', 'location', 'where', 'address', 'room', 'hall', 'place'],
+            'mic'     => ['host', 'speaker', 'organis', 'organiz', 'preacher', 'guest'],
+            'calendar' => ['date', 'when', 'day'],
+            'lock'    => ['capacity', 'seat'],
+        ];
+        foreach ($map as $icon => $words) {
+            foreach ($words as $w) {
+                if (str_contains($l, $w)) {
+                    return $icon === 'lock' ? 'users' : $icon;
+                }
+            }
+        }
+        return 'info';
+    }
+
     /** Your own RSVP: status, ticket and a way to withdraw. @param array<string,mixed> $r @param array<string,mixed> $c */
     private static function mine(array $r, array $c, bool $isOver): string
     {
@@ -347,8 +457,12 @@ final class EventView
         }
         $out .= '</p>';
 
-        if ($going && $r['checkin_code'] !== '' && !$isOver) {
-            $url = Tools::url('checkin', ['event' => (int) $c['id'], 'code' => $r['checkin_code']]);
+        if ($going && !$isOver && Tickets::waitingForPayment($r, $c)) {
+            $out .= '<div class="ev-ticket ev-ticket--waiting">' . Icons::get('clock', 18) . '<div class="ev-ticket-text"><span class="ev-ticket-label">' . esc_html__('Your ticket', 'sepo-events') . '</span>'
+                . '<span>' . esc_html__('Your ticket with its QR code will appear here, and be emailed to you, once your payment has been checked.', 'sepo-events') . '</span></div></div>';
+        }
+        if (Tickets::ready($r, $c) && !$isOver) {
+            $url = Tickets::scanUrl((int) $c['id'], (string) $r['checkin_code']);
             $out .= '<div class="ev-ticket"><div class="ev-ticket-qr">' . Qr::svg($url, 132, 'M', __('Your check-in code', 'sepo-events')) . '</div>'
                 . '<div class="ev-ticket-text"><span class="ev-ticket-label">' . esc_html__('Your check-in code', 'sepo-events') . '</span>'
                 . '<code class="ev-ticket-code">' . esc_html($r['checkin_code']) . '</code>'
@@ -358,6 +472,7 @@ final class EventView
                     $out .= '<span class="ev-ticket-guest">' . esc_html($a['name']) . ' · <code>' . esc_html($a['code']) . '</code></span>';
                 }
             }
+            $out .= '<a class="ev-ticket-open" href="' . esc_url(Tickets::url($r)) . '" target="_blank" rel="noopener">' . esc_html__('Open or print your ticket', 'sepo-events') . '</a>';
             $out .= '</div></div>';
         }
         if ($c['proof'] !== 'off') {

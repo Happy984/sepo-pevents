@@ -36,6 +36,8 @@
   function fmt(s, v) { return String(s || '').replace('%s', v); }
 
   function showResult(tone, name, meta, eventLine, tag) {
+    var old = resultEl.querySelector('.ck-anyway');
+    if (old) { old.remove(); }
     resultEl.className = 'result show ' + tone;
     $('resName').textContent = name || '';
     $('resMeta').textContent = meta || '';
@@ -61,7 +63,7 @@
     return o ? o.textContent.split(' — ')[0] : '';
   }
 
-  function submit(eventId, value) {
+  function submit(eventId, value, force) {
     if (busy) { return; }
     if (!eventId || !value) {
       showResult('warn', T.missing, T.missingBody, '', T.incomplete);
@@ -73,7 +75,7 @@
       method: 'POST',
       credentials: 'same-origin',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json', 'X-WP-Nonce': cfg.nonce },
-      body: JSON.stringify({ event: Number(eventId), code: value })
+      body: JSON.stringify({ event: Number(eventId), code: value, force: !!force })
     }).then(function (res) {
       return res.text().then(function (text) {
         var data = null;
@@ -84,6 +86,22 @@
       if (!r.data) {
         showResult('err', T.noReply, T.noReplyBody, '', T.error);
         addLog('err', T.noReply);
+        return;
+      }
+      if (r.data.code === 'sepo_events_unpaid') {
+        showResult('warn', (r.data.data && r.data.data.person && r.data.data.person.name) || T.noName, r.data.message, eventTitle(), T.unpaid);
+        addLog('warn', ((r.data.data && r.data.data.person && r.data.data.person.name) || T.guest) + ' — ' + T.unpaid);
+        var anyway = document.createElement('button');
+        anyway.type = 'button';
+        anyway.className = 'ck-anyway';
+        anyway.textContent = T.letIn;
+        anyway.addEventListener('click', function () {
+          anyway.disabled = true;
+          anyway.setAttribute('aria-busy', 'true');
+          submit(eventId, value, true);
+        });
+        resultEl.appendChild(anyway);
+        anyway.focus();
         return;
       }
       if (!r.ok || r.data.status === 'error' || r.data.code) {

@@ -192,7 +192,7 @@
 /*
  * The summary box stays in view only while it has its own column beside the
  * tabs; stacked above them it sits in place. --ev-sticky-top is set by the
- * script to clear the theme's fixed header and the admin bar.
+ * script to clear the theme's pinned header and the admin bar.
  */
 .ev-aside { position: static; z-index: 2; }
 @container ev (min-width: 761px) {
@@ -213,12 +213,54 @@
   background-image: linear-gradient(var(--ev-panel), var(--ev-panel));
 }
 .ev-panel-box h3 { margin: 0 0 12px; font-size: .92rem; font-weight: 650; }
-.ev-aside-when { font-size: 1rem; font-weight: 650; margin: 0 0 .25rem; }
-.ev-aside-sub { font-size: .82rem; color: var(--ev-muted); margin: 0 0 .35rem; }
-.ev-aside-loc, .ev-aside-price { font-size: .88rem; margin: .5rem 0 0; display: flex; align-items: baseline; gap: .45rem; }
-.ev-aside-loc .ev-icon, .ev-aside-price .ev-icon { color: var(--ev-muted); position: relative; top: 2px; }
-.ev-aside-divider { border-top: 1px solid var(--ev-rule); margin: 14px 0; }
-.ev-aside-seats { margin: 0; }
+
+/* When and where: a calendar date, the place and price, the seats, and one action. */
+.ev-when { padding: 22px; border-radius: 18px; }
+.ev-panel-box h3.ev-when-kick { margin: 0 0 16px; font-size: .8rem; font-weight: 650; letter-spacing: .07em; text-transform: uppercase; color: var(--ev-muted); }
+.ev-when-head { display: flex; align-items: flex-start; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--ev-rule); }
+.ev-datebox { flex: 0 0 auto; display: flex; flex-direction: column; width: 76px; overflow: hidden; border: 1px solid var(--ev-rule); border-radius: 14px; background: var(--ev-surface); text-align: center; line-height: 1; }
+.ev-datebox-m { padding: 6px 0; background: var(--ev-accent); color: var(--ev-on-accent); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.ev-datebox-d { padding: 9px 0 3px; font-size: 2rem; font-weight: 750; }
+.ev-datebox-w { padding-bottom: 9px; color: var(--ev-muted); font-size: .74rem; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.ev-when-dates { min-width: 0; }
+.ev-aside-when { margin: 0 0 .35rem; font-size: 1.3rem; font-weight: 700; line-height: 1.25; }
+.ev-when-line { display: block; }
+.ev-aside-sub { margin: 0; color: var(--ev-muted); font-size: .95rem; line-height: 1.45; }
+.ev-when-tba { padding-bottom: 16px; border-bottom: 1px solid var(--ev-rule); }
+.ev-when-rows { display: grid; gap: 12px; margin-top: 18px; }
+.ev-when-row { display: flex; align-items: center; gap: 14px; }
+.ev-when-row p { margin: 0; min-width: 0; }
+.ev-when-row small { display: block; margin-bottom: 2px; color: var(--ev-muted); font-size: .85rem; }
+.ev-when-row b { display: block; font-size: 1.12rem; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+.ev-fact-icon { flex: 0 0 46px; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 13px; background: var(--ev-wash); color: var(--ev-accent-ink); }
+.ev-fact-icon .ev-icon { position: static; }
+.ev-seats { margin-top: 20px; }
+.ev-seats-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; margin: 0 0 8px; font-size: .98rem; }
+.ev-seats-top b { font-weight: 650; }
+.ev-seats-top span { color: var(--ev-muted); }
+.ev-seats-bar { height: 9px; overflow: hidden; border-radius: 99px; background: var(--ev-sunken); }
+.ev-seats-bar i { display: block; height: 100%; min-width: 4px; border-radius: 99px; background: var(--ev-accent-ink); }
+.ev-btn.ev-when-go { min-height: 50px; margin-top: 20px; border-radius: 13px; font-size: 1.02rem; gap: .55rem; }
+.ev-when-note { margin: 18px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--ev-sunken); color: var(--ev-muted); font-size: .92rem; text-align: center; }
+.ev-when-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin: 14px 0 0; font-size: .92rem; }
+.ev-when-links a { display: inline-flex; align-items: center; gap: .4rem; color: inherit; opacity: .85; text-decoration: underline; text-underline-offset: 3px; }
+.ev-when-links a:hover, .ev-when-links a:focus-visible { opacity: 1; color: var(--ev-accent-ink); }
+
+/* Details: each one with an icon, its name small above and its value large. */
+.ev-facts { display: grid; margin: 1.25rem 0 0; padding: 0; }
+.ev-fact { display: flex; align-items: center; gap: 16px; padding: 14px 2px; border-bottom: 1px solid var(--ev-rule-soft); }
+.ev-fact:first-child { border-top: 1px solid var(--ev-rule-soft); }
+.ev-fact-text { min-width: 0; }
+.ev-fact dt { margin: 0 0 2px; color: var(--ev-muted); font-size: .9rem; font-weight: 500; }
+.ev-fact dd { margin: 0; font-size: 1.15rem; font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; }
+@media (max-width: 520px) {
+  .ev-when { padding: 18px; }
+  .ev-datebox { width: 66px; }
+  .ev-datebox-d { font-size: 1.7rem; }
+  .ev-aside-when { font-size: 1.15rem; }
+  .ev-fact-icon { flex-basis: 40px; width: 40px; height: 40px; }
+  .ev-fact dd { font-size: 1.05rem; }
+}
 
 /* ---- Empty and gate ------------------------------------------------------ */
 .ev-empty { padding: 24px 18px; text-align: center; border: 1px dashed var(--ev-rule); border-radius: 12px; color: var(--ev-muted); font-size: .88rem; line-height: 1.55; }
@@ -320,3 +362,7 @@
 .ev-pager button:disabled { opacity: .35; cursor: not-allowed; }
 .ev-pager button[aria-current="page"] { background: var(--ev-accent); border-color: var(--ev-accent); color: var(--ev-on-accent); font-weight: 700; }
 .ev-pager-gap { padding: 0 4px; color: var(--ev-muted); align-self: center; }
+.ev-ticket--waiting { flex-wrap: nowrap; align-items: flex-start; font-size: .92rem; border-style: solid; border-color: transparent; background: var(--ev-wait-wash); color: var(--ev-wait); }
+.ev-ticket--waiting .ev-ticket-label { color: inherit; }
+.ev-ticket--waiting svg { flex: none; margin-top: 2px; }
+.ev-ticket-open { align-self: flex-start; margin-top: .3rem; font-size: .85rem; font-weight: 650; color: var(--ev-accent-ink); }
