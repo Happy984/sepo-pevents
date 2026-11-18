@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Sepo Events 1.3.6\n"
+"Project-Id-Version: Sepo Events 1.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sepo-events\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-08T13:04:47+00:00\n"
+"POT-Creation-Date: 2026-11-18T18:36:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: sepo-events\n"
@@ -20,12 +20,6 @@ msgstr ""
 msgid "Sepo Events"
 msgstr ""
 
-#. Plugin URI of the plugin
-#. Author URI of the plugin
-#: sepo-events.php
-msgid "https://edu.sepodesk.com/"
-msgstr ""
-
 #. Description of the plugin
 #: sepo-events.php
 msgid "Events with RSVPs, capacity and a waitlist, guest or signed-in registration, paid-event records, an RSVP dashboard with CSV and print exports, printable attendee cards with QR codes, and a door check-in scanner. Runs on WordPress alone."
@@ -34,6 +28,11 @@ msgstr ""
 #. Author of the plugin
 #: sepo-events.php
 msgid "Euneolink Solutions"
+msgstr ""
+
+#. Author URI of the plugin
+#: sepo-events.php
+msgid "https://edu.sepodesk.com/"
 msgstr ""
 
 #: includes/Admin/MetaBox.php:37
@@ -47,7 +46,7 @@ msgstr ""
 #: includes/Render/Dashboard.php:63
 #: includes/Render/Dashboard.php:128
 #: includes/Render/EventView.php:128
-#: includes/Tools/Pages.php:315
+#: includes/Tools/Pages.php:324
 msgid "RSVPs"
 msgstr ""
 
@@ -55,7 +54,7 @@ msgstr ""
 #: includes/PostType.php:115
 #: includes/Render/Dashboard.php:122
 #: includes/Render/EventView.php:70
-#: includes/Tools/Pages.php:281
+#: includes/Tools/Pages.php:290
 msgid "When"
 msgstr ""
 
@@ -85,7 +84,7 @@ msgstr ""
 
 #: includes/Admin/MetaBox.php:68
 #: includes/Render/Dashboard.php:122
-#: includes/Tools/Pages.php:281
+#: includes/Tools/Pages.php:290
 msgid "Location"
 msgstr ""
 
@@ -116,7 +115,7 @@ msgstr ""
 
 #: includes/Admin/MetaBox.php:81
 #: includes/Frontend.php:108
-#: includes/Render/EventView.php:202
+#: includes/Render/EventView.php:208
 msgid "Full name"
 msgstr ""
 
@@ -124,8 +123,8 @@ msgstr ""
 #: includes/Frontend.php:111
 #: includes/Privacy.php:44
 #: includes/Render/Dashboard.php:141
-#: includes/Render/EventView.php:208
-#: includes/Tools/Pages.php:311
+#: includes/Render/EventView.php:214
+#: includes/Tools/Pages.php:320
 msgid "Phone"
 msgstr ""
 
@@ -158,7 +157,7 @@ msgid "To hide an event from everyone except editors, set its Visibility to Priv
 msgstr ""
 
 #: includes/Admin/MetaBox.php:97
-#: includes/Render/EventView.php:229
+#: includes/Render/EventView.php:235
 msgid "Payment"
 msgstr ""
 
@@ -177,8 +176,8 @@ msgstr ""
 #: includes/Admin/MetaBox.php:104
 #: includes/Admin/Screens.php:86
 #: includes/Render/Dashboard.php:153
-#: includes/Render/EventView.php:378
-#: includes/Render/EventView.php:398
+#: includes/Render/EventView.php:493
+#: includes/Render/EventView.php:513
 msgid "Proof of payment"
 msgstr ""
 
@@ -344,8 +343,8 @@ msgstr ""
 #: includes/Frontend.php:110
 #: includes/Privacy.php:43
 #: includes/Render/Dashboard.php:140
-#: includes/Render/EventView.php:205
-#: includes/Tools/Pages.php:311
+#: includes/Render/EventView.php:211
+#: includes/Tools/Pages.php:320
 msgid "Email"
 msgstr ""
 
@@ -395,27 +394,27 @@ msgstr ""
 
 #: includes/Admin/Tools.php:106
 #: includes/Frontend.php:233
-#: includes/Rest.php:67
-#: includes/Rest.php:205
-#: includes/Rest.php:247
-#: includes/Rest.php:300
-#: includes/Rest.php:416
+#: includes/Rest.php:70
+#: includes/Rest.php:208
+#: includes/Rest.php:250
+#: includes/Rest.php:303
+#: includes/Rest.php:446
 msgid "Event not found."
 msgstr ""
 
 #. translators: %d: number of records
-#: includes/Admin/Tools.php:142
+#: includes/Admin/Tools.php:143
 msgid "%d record"
 msgid_plural "%d records"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: date and time
-#: includes/Admin/Tools.php:150
+#: includes/Admin/Tools.php:151
 msgid "generated %s"
 msgstr ""
 
-#: includes/Admin/Tools.php:161
+#: includes/Admin/Tools.php:162
 msgid "You need permission to manage events to export."
 msgstr ""
 
@@ -509,9 +508,9 @@ msgstr ""
 #: includes/Render/Dashboard.php:76
 #: includes/Render/Dashboard.php:122
 #: includes/Render/Dashboard.php:140
-#: includes/Tools/Pages.php:101
-#: includes/Tools/Pages.php:281
-#: includes/Tools/Pages.php:311
+#: includes/Tools/Pages.php:103
+#: includes/Tools/Pages.php:290
+#: includes/Tools/Pages.php:320
 #: assets/js/blocks.js:29
 #: assets/js/blocks.js:30
 msgid "Event"
@@ -554,7 +553,7 @@ msgstr ""
 #. translators: %d: number.
 #. translators: %d: number of seats
 #: includes/Frontend.php:115
-#: includes/Render/EventView.php:243
+#: includes/Render/EventView.php:249
 msgid "Expected total for %d seat"
 msgid_plural "Expected total for %d seats"
 msgstr[0] ""
@@ -620,12 +619,12 @@ msgid "Uploading…"
 msgstr ""
 
 #: includes/Frontend.php:131
-#: includes/Rest.php:141
+#: includes/Rest.php:144
 msgid "Attach your proof of payment."
 msgstr ""
 
 #: includes/Frontend.php:132
-#: includes/Rest.php:266
+#: includes/Rest.php:269
 msgid "Choose a file to attach."
 msgstr ""
 
@@ -718,12 +717,16 @@ msgid "Your RSVP has been cancelled."
 msgstr ""
 
 #. translators: %s: person's name
+#. translators: %s: name
 #: includes/Mail.php:51
+#: includes/Tickets.php:109
 msgid "Hello %s,"
 msgstr ""
 
 #. translators: %s: person's name
+#. translators: %s: name
 #: includes/Mail.php:51
+#: includes/Tickets.php:109
 msgid "Hello,"
 msgstr ""
 
@@ -731,109 +734,118 @@ msgstr ""
 #. translators: %d: seats
 #: includes/Mail.php:62
 #: includes/Render/EventView.php:77
-#: includes/Render/EventView.php:341
+#: includes/Render/EventView.php:451
 msgid "%d seat"
 msgid_plural "%d seats"
 msgstr[0] ""
 msgstr[1] ""
 
+#: includes/Mail.php:66
+msgid "Your ticket with its QR code will be emailed to you once your payment has been checked."
+msgstr ""
+
 #. translators: %s: check-in code
-#: includes/Mail.php:67
+#: includes/Mail.php:71
 msgid "Your check-in code: %s"
 msgstr ""
 
 #. translators: %s: link
-#: includes/Mail.php:77
+#: includes/Mail.php:78
+msgid "Your ticket with QR codes: %s"
+msgstr ""
+
+#. translators: %s: link
+#: includes/Mail.php:83
 msgid "Event page: %s"
 msgstr ""
 
 #. translators: %s: link
-#: includes/Mail.php:79
+#: includes/Mail.php:85
 msgid "Add to your calendar: %s"
 msgstr ""
 
-#: includes/Mail.php:80
+#: includes/Mail.php:86
 msgid "Plans changed? Open the event page to cancel your RSVP."
 msgstr ""
 
 #. translators: %s: event title
-#: includes/Mail.php:97
+#: includes/Mail.php:103
 msgid "New RSVP for %s"
 msgstr ""
 
 #. translators: %s: name
-#: includes/Mail.php:100
+#: includes/Mail.php:106
 msgid "Name: %s"
 msgstr ""
 
 #. translators: %s: email
-#: includes/Mail.php:102
+#: includes/Mail.php:108
 msgid "Email: %s"
 msgstr ""
 
 #. translators: %s: phone
-#: includes/Mail.php:106
+#: includes/Mail.php:112
 msgid "Phone: %s"
 msgstr ""
 
 #. translators: %d: seats
-#: includes/Mail.php:109
+#: includes/Mail.php:115
 msgid "Seats: %d"
 msgstr ""
 
 #. translators: %s: status
-#: includes/Mail.php:111
+#: includes/Mail.php:117
 msgid "Status: %s"
 msgstr ""
 
 #. translators: %s: status
-#: includes/Mail.php:111
+#: includes/Mail.php:117
 #: includes/Render/Dashboard.php:139
 msgid "going"
 msgstr ""
 
 #. translators: %s: status
-#: includes/Mail.php:111
+#: includes/Mail.php:117
 #: includes/Render/Dashboard.php:139
 msgid "waitlist"
 msgstr ""
 
 #. translators: %s: money
-#: includes/Mail.php:115
+#: includes/Mail.php:121
 msgid "Recorded payment: %s"
 msgstr ""
 
 #. translators: %d: number of files
-#: includes/Mail.php:119
+#: includes/Mail.php:125
 msgid "Proof of payment: %d file attached"
 msgid_plural "Proof of payment: %d files attached"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: link
-#: includes/Mail.php:123
+#: includes/Mail.php:129
 msgid "All RSVPs: %s"
 msgstr ""
 
 #. translators: %s: event title
-#: includes/Mail.php:125
+#: includes/Mail.php:131
 msgid "New RSVP: %s"
 msgstr ""
 
 #. translators: 1: person, 2: number of files, 3: event title
-#: includes/Mail.php:138
+#: includes/Mail.php:144
 msgid "%1$s attached %2$d proof of payment file for %3$s."
 msgid_plural "%1$s attached %2$d proof of payment files for %3$s."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: link
-#: includes/Mail.php:141
+#: includes/Mail.php:147
 msgid "Check it here: %s"
 msgstr ""
 
 #. translators: %s: event title
-#: includes/Mail.php:144
+#: includes/Mail.php:150
 msgid "Proof of payment to check: %s"
 msgstr ""
 
@@ -843,7 +855,7 @@ msgstr ""
 #: includes/Render/Dashboard.php:62
 #: includes/Render/Dashboard.php:113
 #: includes/Settings.php:86
-#: includes/Tools/Pages.php:288
+#: includes/Tools/Pages.php:297
 msgid "Events"
 msgstr ""
 
@@ -954,6 +966,7 @@ msgstr ""
 
 #: includes/PostType.php:116
 #: includes/Render/EventView.php:73
+#: includes/Render/EventView.php:308
 msgid "Where"
 msgstr ""
 
@@ -961,8 +974,8 @@ msgstr ""
 #: includes/Privacy.php:45
 #: includes/Render/Dashboard.php:126
 #: includes/Render/Dashboard.php:140
-#: includes/Render/EventView.php:216
-#: includes/Tools/Pages.php:312
+#: includes/Render/EventView.php:222
+#: includes/Tools/Pages.php:321
 msgid "Seats"
 msgstr ""
 
@@ -1006,12 +1019,12 @@ msgstr ""
 #: includes/Render/Dashboard.php:77
 #: includes/Render/Dashboard.php:126
 #: includes/Render/Dashboard.php:140
-#: includes/Tools/Pages.php:312
+#: includes/Tools/Pages.php:321
 msgid "Status"
 msgstr ""
 
 #: includes/Privacy.php:42
-#: includes/Tools/Pages.php:311
+#: includes/Tools/Pages.php:320
 msgid "Name"
 msgstr ""
 
@@ -1102,22 +1115,22 @@ msgstr ""
 
 #: includes/Render/Dashboard.php:79
 #: includes/Render/Dashboard.php:124
-#: includes/Tools/Pages.php:283
+#: includes/Tools/Pages.php:292
 msgid "Going"
 msgstr ""
 
 #: includes/Render/Dashboard.php:80
 #: includes/Render/Dashboard.php:118
 #: includes/Render/Dashboard.php:124
-#: includes/Tools/Pages.php:197
-#: includes/Tools/Pages.php:283
+#: includes/Tools/Pages.php:202
+#: includes/Tools/Pages.php:292
 msgid "Waitlist"
 msgstr ""
 
 #: includes/Render/Dashboard.php:81
 #: includes/Render/Dashboard.php:118
 #: includes/Render/Dashboard.php:124
-#: includes/Tools/Pages.php:283
+#: includes/Tools/Pages.php:292
 msgid "Cancelled"
 msgstr ""
 
@@ -1173,7 +1186,8 @@ msgstr ""
 #. translators: placeholder values.
 #: includes/Render/Dashboard.php:117
 #: includes/Render/Dashboard.php:123
-#: includes/Tools/Pages.php:282
+#: includes/Render/EventView.php:342
+#: includes/Tools/Pages.php:291
 msgid "Seats taken"
 msgstr ""
 
@@ -1189,9 +1203,9 @@ msgstr ""
 
 #: includes/Render/Dashboard.php:118
 #: includes/Render/Dashboard.php:125
-#: includes/Tools/Pages.php:73
-#: includes/Tools/Pages.php:284
-#: includes/Tools/Pages.php:312
+#: includes/Tools/Pages.php:75
+#: includes/Tools/Pages.php:293
+#: includes/Tools/Pages.php:321
 msgid "Checked in"
 msgstr ""
 
@@ -1203,7 +1217,7 @@ msgstr ""
 #. translators: placeholder values.
 #: includes/Render/Dashboard.php:120
 #: includes/Render/Dashboard.php:125
-#: includes/Tools/Pages.php:284
+#: includes/Tools/Pages.php:293
 msgid "Collected"
 msgstr ""
 
@@ -1224,23 +1238,26 @@ msgstr ""
 #. translators: %d: seats
 #: includes/Render/Dashboard.php:123
 #: includes/Render/EventView.php:77
-#: includes/Tools/Pages.php:282
+#: includes/Tools/Pages.php:291
 msgid "Capacity"
 msgstr ""
 
 #: includes/Render/Dashboard.php:123
-#: includes/Tools/Pages.php:282
+#: includes/Tools/Pages.php:291
 msgid "Seats left"
 msgstr ""
 
 #: includes/Render/Dashboard.php:126
-#: includes/Tools/Pages.php:196
+#: includes/Tickets.php:105
+#: includes/Tickets.php:252
+#: includes/Tickets.php:253
+#: includes/Tools/Pages.php:201
 msgid "Registrant"
 msgstr ""
 
 #: includes/Render/Dashboard.php:126
 #: includes/Render/Dashboard.php:142
-#: includes/Tools/Pages.php:313
+#: includes/Tools/Pages.php:322
 msgid "Attendees"
 msgstr ""
 
@@ -1266,7 +1283,7 @@ msgid "full"
 msgstr ""
 
 #: includes/Render/Dashboard.php:128
-#: includes/Tools/Pages.php:97
+#: includes/Tools/Pages.php:99
 msgid "Scan"
 msgstr ""
 
@@ -1328,7 +1345,7 @@ msgid "Cancel"
 msgstr ""
 
 #: includes/Render/Dashboard.php:138
-#: includes/Render/Dashboard.php:158
+#: includes/Render/Dashboard.php:171
 msgid "Delete"
 msgstr ""
 
@@ -1342,12 +1359,12 @@ msgstr ""
 
 #: includes/Render/Dashboard.php:141
 #: includes/Render/ListView.php:123
-#: includes/Tools/Pages.php:313
+#: includes/Tools/Pages.php:322
 msgid "Paid"
 msgstr ""
 
 #: includes/Render/Dashboard.php:141
-#: includes/Tools/Pages.php:200
+#: includes/Tools/Pages.php:207
 msgid "Check-in code"
 msgstr ""
 
@@ -1356,12 +1373,12 @@ msgid "Registrant checked in"
 msgstr ""
 
 #: includes/Render/Dashboard.php:142
-#: includes/Tools/Pages.php:307
+#: includes/Tools/Pages.php:316
 msgid "Yes"
 msgstr ""
 
 #: includes/Render/Dashboard.php:142
-#: includes/Tools/Pages.php:307
+#: includes/Tools/Pages.php:316
 msgid "No"
 msgstr ""
 
@@ -1382,7 +1399,7 @@ msgid "This removes the row entirely. The record is gone — no undo, no history
 msgstr ""
 
 #: includes/Render/Dashboard.php:145
-#: includes/Render/Dashboard.php:158
+#: includes/Render/Dashboard.php:171
 msgid "Delete permanently"
 msgstr ""
 
@@ -1464,47 +1481,91 @@ msgstr ""
 msgid "Payment marked as checked."
 msgstr ""
 
-#. translators: %1$s: value, %2$s: value.
-#: includes/Render/Dashboard.php:156
+#. translators: %s: email address
+#: includes/Render/Dashboard.php:158
+msgid "Payment checked. The ticket with its QR code was emailed to %s."
+msgstr ""
+
+#: includes/Render/Dashboard.php:159
+msgid "Payment checked. No ticket was emailed: this registration has no email address, or the site could not send it. Open the ticket from the event page instead."
+msgstr ""
+
+#. translators: %s: email address
+#: includes/Render/Dashboard.php:161
+msgid "Ticket emailed again to %s."
+msgstr ""
+
+#: includes/Render/Dashboard.php:162
+#: includes/Tickets.php:255
+#: includes/Tickets.php:270
+msgid "Ticket"
+msgstr ""
+
+#: includes/Render/Dashboard.php:163
+msgid "Issued when the payment is marked as checked."
+msgstr ""
+
+#. translators: %s: date and time
+#: includes/Render/Dashboard.php:165
+msgid "Emailed %s"
+msgstr ""
+
+#: includes/Render/Dashboard.php:166
+msgid "Ready, not emailed yet"
+msgstr ""
+
+#: includes/Render/Dashboard.php:167
+msgid "Email the ticket again"
+msgstr ""
+
+#: includes/Render/Dashboard.php:168
+msgid "Email the ticket"
+msgstr ""
+
+#: includes/Render/Dashboard.php:169
+msgid "Sending…"
+msgstr ""
+
+#: includes/Render/Dashboard.php:169
 msgid "Payment check removed."
 msgstr ""
 
-#: includes/Render/Dashboard.php:157
+#: includes/Render/Dashboard.php:170
 msgid "Open"
 msgstr ""
 
-#: includes/Render/Dashboard.php:158
+#: includes/Render/Dashboard.php:171
 msgid "Restore"
 msgstr ""
 
-#: includes/Render/Dashboard.php:159
+#: includes/Render/Dashboard.php:172
 msgid "in bin"
 msgstr ""
 
-#: includes/Render/Dashboard.php:159
+#: includes/Render/Dashboard.php:172
 msgid "Remove RSVPs"
 msgstr ""
 
 #. translators: %s: value.
-#: includes/Render/Dashboard.php:161
+#: includes/Render/Dashboard.php:174
 msgid "Move \"%s\" to the bin?"
 msgstr ""
 
-#: includes/Render/Dashboard.php:162
+#: includes/Render/Dashboard.php:175
 msgid "The event page goes offline and it disappears from the events list. Its RSVPs are kept, and you can restore it from this table or from Events → Bin."
 msgstr ""
 
-#: includes/Render/Dashboard.php:163
+#: includes/Render/Dashboard.php:176
 msgid "Move to bin"
 msgstr ""
 
 #. translators: %s: value.
-#: includes/Render/Dashboard.php:165
+#: includes/Render/Dashboard.php:178
 msgid "Delete \"%s\" permanently?"
 msgstr ""
 
 #. translators: %s: value.
-#: includes/Render/Dashboard.php:167
+#: includes/Render/Dashboard.php:180
 msgid ""
 "This deletes the event and its %s RSVPs, with any proof of payment files.\n"
 "\n"
@@ -1512,12 +1573,12 @@ msgid ""
 msgstr ""
 
 #. translators: %s: value.
-#: includes/Render/Dashboard.php:169
+#: includes/Render/Dashboard.php:182
 msgid "Remove the RSVPs for \"%s\"?"
 msgstr ""
 
 #. translators: %s: value.
-#: includes/Render/Dashboard.php:171
+#: includes/Render/Dashboard.php:184
 msgid ""
 "The event itself is already gone. This removes its %s RSVPs and any proof of payment files.\n"
 "\n"
@@ -1525,17 +1586,17 @@ msgid ""
 msgstr ""
 
 #. translators: placeholder values.
-#: includes/Render/Dashboard.php:173
+#: includes/Render/Dashboard.php:186
 msgid "Event moved to the bin."
 msgstr ""
 
 #. translators: placeholder values.
-#: includes/Render/Dashboard.php:173
+#: includes/Render/Dashboard.php:186
 msgid "Event restored."
 msgstr ""
 
 #. translators: placeholder values.
-#: includes/Render/Dashboard.php:173
+#: includes/Render/Dashboard.php:186
 msgid "Event deleted with %s RSVPs."
 msgstr ""
 
@@ -1552,13 +1613,14 @@ msgid "Sign in"
 msgstr ""
 
 #: includes/Render/EventView.php:79
+#: includes/Render/EventView.php:313
 #: includes/Render/ListView.php:120
 msgid "Price"
 msgstr ""
 
 #. translators: %s: price
 #: includes/Render/EventView.php:81
-#: includes/Render/EventView.php:289
+#: includes/Render/EventView.php:315
 msgid "%s per seat"
 msgstr ""
 
@@ -1579,239 +1641,289 @@ msgstr ""
 msgid "No further details yet."
 msgstr ""
 
-#: includes/Render/EventView.php:151
+#: includes/Render/EventView.php:157
 msgid "About this event"
 msgstr ""
 
-#: includes/Render/EventView.php:161
+#: includes/Render/EventView.php:167
 msgid "seat left"
 msgid_plural "seats left"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Render/EventView.php:163
+#: includes/Render/EventView.php:169
 msgid "seat taken"
 msgid_plural "seats taken"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Render/EventView.php:165
+#: includes/Render/EventView.php:171
 msgid "on the waitlist"
 msgstr ""
 
-#: includes/Render/EventView.php:167
+#: includes/Render/EventView.php:173
 msgid "capacity"
 msgstr ""
 
-#: includes/Render/EventView.php:169
+#: includes/Render/EventView.php:175
 #: assets/js/blocks.js:21
 msgid "registration"
 msgid_plural "registrations"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Render/EventView.php:178
+#: includes/Render/EventView.php:184
 msgid "This event has finished. RSVPs are closed."
 msgstr ""
 
-#: includes/Render/EventView.php:180
-#: includes/Rest.php:77
+#: includes/Render/EventView.php:186
+#: includes/Rest.php:80
 msgid "Registration for this event is closed."
 msgstr ""
 
-#: includes/Render/EventView.php:182
+#: includes/Render/EventView.php:188
 msgid "This event is private. Publish it to open RSVPs."
 msgstr ""
 
-#: includes/Render/EventView.php:186
+#: includes/Render/EventView.php:192
 msgid "Paid event."
 msgstr ""
 
-#: includes/Render/EventView.php:187
+#: includes/Render/EventView.php:193
 msgid "Record the amount you have paid for each attendee. Payment is handled outside this page; the form is a record of it."
 msgstr ""
 
 #. translators: %s: price
-#: includes/Render/EventView.php:190
+#: includes/Render/EventView.php:196
 msgid "Unit price: %s."
 msgstr ""
 
-#: includes/Render/EventView.php:195
+#: includes/Render/EventView.php:201
 msgid "The event is full."
 msgstr ""
 
-#: includes/Render/EventView.php:195
+#: includes/Render/EventView.php:201
 msgid "Join the waitlist and you will be emailed if a seat opens up."
 msgstr ""
 
-#: includes/Render/EventView.php:200
+#: includes/Render/EventView.php:206
 msgid "Your details"
 msgstr ""
 
-#: includes/Render/EventView.php:203
+#: includes/Render/EventView.php:209
 msgid "e.g. Chanda Mwale"
 msgstr ""
 
-#: includes/Render/EventView.php:206
+#: includes/Render/EventView.php:212
 msgid "you@example.com"
 msgstr ""
 
-#: includes/Render/EventView.php:209
+#: includes/Render/EventView.php:215
 msgid "e.g. 097 123 4567"
 msgstr ""
 
-#: includes/Render/EventView.php:217
+#: includes/Render/EventView.php:223
 msgid "How many seats"
 msgstr ""
 
-#: includes/Render/EventView.php:221
+#: includes/Render/EventView.php:227
 msgid "Includes yourself."
 msgstr ""
 
-#: includes/Render/EventView.php:221
+#: includes/Render/EventView.php:227
 msgid "Includes yourself. Only your own details are recorded."
 msgstr ""
 
 #. translators: %s: currency code
-#: includes/Render/EventView.php:232
+#: includes/Render/EventView.php:238
 msgid "Amount paid for yourself (%s)"
 msgstr ""
 
 #. translators: %s: currency code
-#: includes/Render/EventView.php:237
+#: includes/Render/EventView.php:243
 msgid "Enter what you actually paid, in %s."
 msgstr ""
 
-#: includes/Render/EventView.php:254
+#: includes/Render/EventView.php:260
+#: includes/Render/EventView.php:351
 msgid "Join the waitlist"
 msgstr ""
 
-#: includes/Render/EventView.php:254
+#: includes/Render/EventView.php:260
 msgid "RSVP"
 msgstr ""
 
-#: includes/Render/EventView.php:263
+#: includes/Render/EventView.php:269
 #: includes/Render/ListView.php:172
 msgid "Happening now"
 msgstr ""
 
-#: includes/Render/EventView.php:263
+#: includes/Render/EventView.php:269
 msgid "When and where"
 msgstr ""
 
-#: includes/Render/EventView.php:270
+#: includes/Render/EventView.php:283
 msgid "Until"
 msgstr ""
 
-#: includes/Render/EventView.php:270
+#: includes/Render/EventView.php:283
 #: includes/Render/ListView.php:225
 msgid "All day"
 msgstr ""
 
-#: includes/Render/EventView.php:282
+#. translators: 1: start time, 2: end day, short, such as Tue 8 Dec, 3: end time
+#: includes/Render/EventView.php:287
+msgid "%1$s – %2$s, %3$s"
+msgstr ""
+
+#: includes/Render/EventView.php:302
 msgid "Date to be announced."
 msgstr ""
 
 #. translators: %s: price
-#: includes/Render/EventView.php:289
+#: includes/Render/EventView.php:315
 msgid "Free entry"
 msgstr ""
 
 #. translators: 1: seats left, 2: capacity
-#: includes/Render/EventView.php:296
-msgid "%1$d of %2$d seat left."
-msgid_plural "%1$d of %2$d seats left."
+#: includes/Render/EventView.php:324
+msgid "%1$d of %2$d seat left"
+msgid_plural "%1$d of %2$d seats left"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: seats
-#: includes/Render/EventView.php:299
-msgid "%d seat taken."
-msgid_plural "%d seats taken."
+#: includes/Render/EventView.php:327
+msgid "%d seat taken"
+msgid_plural "%d seats taken"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d: people waiting
-#: includes/Render/EventView.php:303
-msgid "%d on the waitlist."
+#: includes/Render/EventView.php:333
+msgid "%d on the waitlist"
 msgstr ""
 
-#: includes/Render/EventView.php:308
+#. translators: %d: seats taken
+#: includes/Render/EventView.php:336
+msgid "%d taken"
+msgid_plural "%d taken"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/Render/EventView.php:349
+msgid "View your RSVP"
+msgstr ""
+
+#: includes/Render/EventView.php:351
+msgid "RSVP now"
+msgstr ""
+
+#: includes/Render/EventView.php:357
+msgid "This event has finished."
+msgstr ""
+
+#: includes/Render/EventView.php:359
+msgid "Registration is closed."
+msgstr ""
+
+#: includes/Render/EventView.php:364
+#: includes/Tickets.php:124
+#: includes/Tickets.php:261
 msgid "Add to calendar"
 msgstr ""
 
-#: includes/Render/EventView.php:311
+#: includes/Render/EventView.php:367
 msgid "Manage RSVPs"
 msgstr ""
 
-#: includes/Render/EventView.php:339
-#: includes/Rest.php:196
+#. translators: 1: a city, such as Lusaka, 2: a time zone, such as CAT
+#: includes/Render/EventView.php:409
+msgid "%1$s time (%2$s)"
+msgstr ""
+
+#: includes/Render/EventView.php:449
+#: includes/Rest.php:199
 msgid "You are confirmed."
 msgstr ""
 
-#: includes/Render/EventView.php:339
+#: includes/Render/EventView.php:449
 msgid "You are on the waitlist."
 msgstr ""
 
-#: includes/Render/EventView.php:352
-#: includes/Render/EventView.php:353
+#: includes/Render/EventView.php:461
+#: includes/Tickets.php:116
+msgid "Your ticket"
+msgstr ""
+
+#: includes/Render/EventView.php:462
+msgid "Your ticket with its QR code will appear here, and be emailed to you, once your payment has been checked."
+msgstr ""
+
+#: includes/Render/EventView.php:466
+#: includes/Render/EventView.php:467
 msgid "Your check-in code"
 msgstr ""
 
-#: includes/Render/EventView.php:355
+#: includes/Render/EventView.php:469
 msgid "Show this at the door."
 msgstr ""
 
-#: includes/Render/EventView.php:368
+#: includes/Render/EventView.php:475
+#: includes/Tickets.php:123
+msgid "Open or print your ticket"
+msgstr ""
+
+#: includes/Render/EventView.php:483
 msgid "Cancel my RSVP"
 msgstr ""
 
-#: includes/Render/EventView.php:368
+#: includes/Render/EventView.php:483
 msgid "Leave the waitlist"
 msgstr ""
 
-#: includes/Render/EventView.php:378
+#: includes/Render/EventView.php:493
 msgid "Attach a receipt, slip or screenshot"
 msgstr ""
 
-#: includes/Render/EventView.php:378
+#: includes/Render/EventView.php:493
 msgid "Proof of payment (optional)"
 msgstr ""
 
 #. translators: 1: list of file types, 2: size in MB, 3: number of files
-#: includes/Render/EventView.php:380
+#: includes/Render/EventView.php:495
 msgid "%1$s, up to %2$d MB each, at most %3$d files. A photo or screenshot of the receipt or mobile-money message works."
 msgstr ""
 
-#: includes/Render/EventView.php:386
+#: includes/Render/EventView.php:501
 msgid "Choose files"
 msgstr ""
 
-#: includes/Render/EventView.php:386
+#: includes/Render/EventView.php:501
 msgid "or drop them here"
 msgstr ""
 
-#: includes/Render/EventView.php:400
+#: includes/Render/EventView.php:515
 msgid "Needed"
 msgstr ""
 
-#: includes/Render/EventView.php:400
+#: includes/Render/EventView.php:515
 msgid "None attached"
 msgstr ""
 
-#: includes/Render/EventView.php:402
+#: includes/Render/EventView.php:517
 msgid "Checked"
 msgstr ""
 
-#: includes/Render/EventView.php:404
+#: includes/Render/EventView.php:519
 msgid "Waiting to be checked"
 msgstr ""
 
-#: includes/Render/EventView.php:416
+#: includes/Render/EventView.php:531
 msgid "Send proof of payment"
 msgstr ""
 
-#: includes/Render/EventView.php:416
+#: includes/Render/EventView.php:531
 msgid "Add more proof"
 msgstr ""
 
@@ -1882,136 +1994,159 @@ msgstr ""
 msgid "Event #%d"
 msgstr ""
 
-#: includes/Rest.php:70
+#: includes/Rest.php:73
 msgid "Your RSVP could not be sent."
 msgstr ""
 
-#: includes/Rest.php:74
+#: includes/Rest.php:77
 msgid "This event is private. RSVPs are closed."
 msgstr ""
 
-#: includes/Rest.php:80
-#: includes/Rest.php:262
+#: includes/Rest.php:83
+#: includes/Rest.php:265
 msgid "This event has already finished."
 msgstr ""
 
-#: includes/Rest.php:84
+#: includes/Rest.php:87
 msgid "Please sign in to RSVP."
 msgstr ""
 
-#: includes/Rest.php:87
+#: includes/Rest.php:90
 msgid "Too many RSVPs from this connection. Please try again in a few minutes."
 msgstr ""
 
-#: includes/Rest.php:95
+#: includes/Rest.php:98
 msgid "Enter a valid email address to RSVP."
 msgstr ""
 
-#: includes/Rest.php:103
+#: includes/Rest.php:106
 msgid "Enter your name."
 msgstr ""
 
-#: includes/Rest.php:106
+#: includes/Rest.php:109
 msgid "Enter your phone number."
 msgstr ""
 
-#: includes/Rest.php:114
+#: includes/Rest.php:117
 msgid "This email already has an RSVP for this event. Use the link in your confirmation email to change or cancel it."
 msgstr ""
 
-#: includes/Rest.php:168
+#: includes/Rest.php:171
 #: includes/Rsvps.php:311
 msgid "Could not record your RSVP. Please try again."
 msgstr ""
 
-#: includes/Rest.php:196
+#: includes/Rest.php:199
 msgid "The event is full — you are on the waitlist."
 msgstr ""
 
-#: includes/Rest.php:223
-#: includes/Rest.php:232
-#: includes/Rest.php:259
-#: includes/Rest.php:278
-#: includes/Rest.php:326
-#: includes/Rest.php:399
+#: includes/Rest.php:226
+#: includes/Rest.php:235
+#: includes/Rest.php:262
+#: includes/Rest.php:281
+#: includes/Rest.php:329
+#: includes/Rest.php:350
+#: includes/Rest.php:429
 msgid "No RSVP matches that reference."
 msgstr ""
 
-#: includes/Rest.php:229
+#: includes/Rest.php:232
 msgid "Could not cancel that RSVP."
 msgstr ""
 
-#: includes/Rest.php:251
+#: includes/Rest.php:254
 msgid "This event does not take proof of payment."
 msgstr ""
 
-#: includes/Rest.php:282
+#: includes/Rest.php:285
 msgid "Proof of payment received. The organisers will check it."
 msgstr ""
 
-#: includes/Rest.php:295
+#: includes/Rest.php:298
 msgid "Choose an event and what to do with it."
 msgstr ""
 
-#: includes/Rest.php:305
+#: includes/Rest.php:308
 msgid "You are not allowed to delete this event."
 msgstr ""
 
-#: includes/Rest.php:308
+#: includes/Rest.php:311
 msgid "The event could not be moved to the bin."
 msgstr ""
 
-#: includes/Rest.php:314
+#: includes/Rest.php:317
 msgid "The event could not be restored."
 msgstr ""
 
-#: includes/Rest.php:317
+#: includes/Rest.php:320
 msgid "The event could not be deleted."
 msgstr ""
 
-#: includes/Rest.php:370
+#: includes/Rest.php:354
+msgid "Mark the payment as checked first; the ticket is sent then."
+msgstr ""
+
+#: includes/Rest.php:354
+msgid "This registration has no ticket: it is not a confirmed seat."
+msgstr ""
+
+#: includes/Rest.php:358
+msgid "The ticket could not be emailed. Check that the registration has an email address and that the site can send email."
+msgstr ""
+
+#: includes/Rest.php:400
 msgid "Unknown status filter."
 msgstr ""
 
-#: includes/Rest.php:382
+#: includes/Rest.php:412
 msgid "An event reference is required."
 msgstr ""
 
-#: includes/Rest.php:385
+#: includes/Rest.php:415
 msgid "Pass either id or purge, not both."
 msgstr ""
 
-#: includes/Rest.php:393
+#: includes/Rest.php:423
 msgid "Pass an id, or purge: true to remove all RSVPs for the event."
 msgstr ""
 
-#: includes/Rest.php:412
+#: includes/Rest.php:442
 msgid "An event and a code are required."
 msgstr ""
 
-#: includes/Rest.php:420
+#: includes/Rest.php:451
 msgid "That code, email or phone was not recognised for this event."
 msgstr ""
 
 #. translators: %s: person's name
-#: includes/Rest.php:424
+#: includes/Rest.php:455
 msgid "%s cancelled their RSVP. They are not checked in."
 msgstr ""
 
 #. translators: %s: person's name
-#: includes/Rest.php:424
+#: includes/Rest.php:455
 msgid "This guest"
+msgstr ""
+
+#. translators: %s: person's name
+#: includes/Rest.php:458
+msgid "The payment for %s has not been checked yet, so they have no ticket. Check the payment in the dashboard, or let them in anyway."
+msgstr ""
+
+#. translators: %s: person's name
+#: includes/Rest.php:458
+msgid "this guest"
 msgstr ""
 
 #: includes/Rsvps.php:252
 msgid "Sign in or provide an email to RSVP."
 msgstr ""
 
-#: includes/Rsvps.php:468
+#: includes/Rsvps.php:473
 msgid "Removed"
 msgstr ""
 
-#: includes/Rsvps.php:595
+#: includes/Rsvps.php:600
 msgid "The event is busy. Please try again in a moment."
 msgstr ""
 
@@ -2019,8 +2154,89 @@ msgstr ""
 msgid "Upcoming events and workshops."
 msgstr ""
 
+#. translators: %s: code
+#: includes/Tickets.php:103
+#: includes/Tickets.php:250
+msgid "QR code %s"
+msgstr ""
+
+#: includes/Tickets.php:105
+#: includes/Tickets.php:252
+#: includes/Tickets.php:253
+#: includes/Tools/Pages.php:81
+#: includes/Tools/Pages.php:201
+#: includes/Tools/Pages.php:203
+msgid "Guest"
+msgstr ""
+
+#. translators: %s: name
+#: includes/Tickets.php:110
+msgid "Your payment has been checked and your place is confirmed. Here is your ticket."
+msgstr ""
+
+#. translators: %s: name
+#: includes/Tickets.php:110
+msgid "Your place is confirmed. Here is your ticket."
+msgstr ""
+
+#: includes/Tickets.php:111
+msgid "Each person shows their own code at the door, on a phone or printed."
+msgstr ""
+
+#: includes/Tickets.php:111
+msgid "Show this code at the door, on your phone or printed."
+msgstr ""
+
+#: includes/Tickets.php:124
+#: includes/Tickets.php:245
+#: includes/Tickets.php:261
+msgid "Event page"
+msgstr ""
+
+#. translators: %s: link
+#: includes/Tickets.php:139
+msgid "Open or print your ticket: %s"
+msgstr ""
+
+#. translators: %s: event title
+#: includes/Tickets.php:149
+msgid "Your ticket: %s"
+msgstr ""
+
+#: includes/Tickets.php:238
+msgid "Ticket not found"
+msgstr ""
+
+#: includes/Tickets.php:238
+msgid "This ticket link is not valid. Open the link in your email again, or ask the organiser."
+msgstr ""
+
+#: includes/Tickets.php:242
+msgid "This registration was cancelled."
+msgstr ""
+
+#: includes/Tickets.php:243
+msgid "You are on the waitlist. Your ticket will be emailed to you when a seat opens up."
+msgstr ""
+
+#: includes/Tickets.php:244
+msgid "Your ticket will be ready once your payment has been checked. We will email it to you then."
+msgstr ""
+
+#: includes/Tickets.php:258
+msgid "Payment checked"
+msgstr ""
+
+#: includes/Tickets.php:260
+msgid "Show the code at the door, on your phone or printed. Each person has their own code."
+msgstr ""
+
+#: includes/Tickets.php:261
+msgid "Print or save as PDF"
+msgstr ""
+
 #: includes/Tools/Pages.php:58
-#: includes/Tools/Pages.php:94
+#: includes/Tools/Pages.php:96
 msgid "Starting camera…"
 msgstr ""
 
@@ -2053,156 +2269,166 @@ msgid "Not checked in"
 msgstr ""
 
 #: includes/Tools/Pages.php:66
-msgid "Error"
+msgid "Payment not checked"
 msgstr ""
 
 #: includes/Tools/Pages.php:67
-msgid "No response"
+msgid "Check in anyway"
 msgstr ""
 
 #: includes/Tools/Pages.php:68
-msgid "The site did not return a usable reply."
+msgid "Error"
 msgstr ""
 
 #: includes/Tools/Pages.php:69
-msgid "Network error"
+msgid "No response"
 msgstr ""
 
 #: includes/Tools/Pages.php:70
-msgid "Could not reach the site."
+msgid "The site did not return a usable reply."
 msgstr ""
 
 #: includes/Tools/Pages.php:71
-msgid "(no name on file)"
+msgid "Network error"
 msgstr ""
 
 #: includes/Tools/Pages.php:72
-msgid "Already checked in"
+msgid "Could not reach the site."
+msgstr ""
+
+#: includes/Tools/Pages.php:73
+msgid "(no name on file)"
 msgstr ""
 
 #: includes/Tools/Pages.php:74
+msgid "Already checked in"
+msgstr ""
+
+#: includes/Tools/Pages.php:76
 msgid "On the waitlist — checked in"
 msgstr ""
 
 #. translators: %s: value.
-#: includes/Tools/Pages.php:76
+#: includes/Tools/Pages.php:78
 msgid "%s — already in"
 msgstr ""
 
 #. translators: %s: value.
-#: includes/Tools/Pages.php:78
+#: includes/Tools/Pages.php:80
 msgid "%s — checked in"
 msgstr ""
 
-#: includes/Tools/Pages.php:79
-#: includes/Tools/Pages.php:196
-#: includes/Tools/Pages.php:198
-msgid "Guest"
-msgstr ""
-
-#: includes/Tools/Pages.php:80
+#: includes/Tools/Pages.php:82
 msgid "found by email"
 msgstr ""
 
-#: includes/Tools/Pages.php:81
+#: includes/Tools/Pages.php:83
 msgid "found by phone"
 msgstr ""
 
 #. translators: %s: value.
-#: includes/Tools/Pages.php:83
+#: includes/Tools/Pages.php:85
 msgid "at %s"
 msgstr ""
 
-#: includes/Tools/Pages.php:88
 #: includes/Tools/Pages.php:90
+#: includes/Tools/Pages.php:92
 msgid "Event check-in"
 msgstr ""
 
-#: includes/Tools/Pages.php:90
+#: includes/Tools/Pages.php:92
 msgid "Scan a card, or look someone up by their code, email or phone."
 msgstr ""
 
-#: includes/Tools/Pages.php:91
+#: includes/Tools/Pages.php:93
 msgid "← RSVP dashboard"
 msgstr ""
 
-#: includes/Tools/Pages.php:96
+#: includes/Tools/Pages.php:98
 msgid "Check-in mode"
 msgstr ""
 
-#: includes/Tools/Pages.php:98
+#: includes/Tools/Pages.php:100
 msgid "Manual"
 msgstr ""
 
-#: includes/Tools/Pages.php:101
+#: includes/Tools/Pages.php:103
 msgid "No events yet"
 msgstr ""
 
-#: includes/Tools/Pages.php:102
+#: includes/Tools/Pages.php:104
 msgid "Scanned cards switch to their own event automatically."
 msgstr ""
 
-#: includes/Tools/Pages.php:103
+#: includes/Tools/Pages.php:105
 msgid "Code, email or phone"
 msgstr ""
 
-#: includes/Tools/Pages.php:104
+#: includes/Tools/Pages.php:106
 msgid "Card code, email, or phone number"
 msgstr ""
 
-#: includes/Tools/Pages.php:105
+#: includes/Tools/Pages.php:107
 msgid "Check in"
 msgstr ""
 
-#: includes/Tools/Pages.php:106
+#: includes/Tools/Pages.php:108
 msgid "Any of the three works. The card's code is the fastest; the email or the number the guest registered with will also find them."
 msgstr ""
 
-#: includes/Tools/Pages.php:109
+#: includes/Tools/Pages.php:111
 msgid "Recent scans"
 msgstr ""
 
-#: includes/Tools/Pages.php:188
+#: includes/Tools/Pages.php:193
 msgid "Attendee cards"
 msgstr ""
 
-#: includes/Tools/Pages.php:189
+#: includes/Tools/Pages.php:194
 msgid "No one with a name and a confirmed seat to print a card for yet."
 msgstr ""
 
-#. translators: %d: number of cards
 #: includes/Tools/Pages.php:206
+msgid "Payment not checked yet"
+msgstr ""
+
+#: includes/Tools/Pages.php:206
+msgid "The QR code is printed once the payment has been checked."
+msgstr ""
+
+#. translators: %d: number of cards
+#: includes/Tools/Pages.php:213
 msgid "%d card"
 msgid_plural "%d cards"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s: event title
-#: includes/Tools/Pages.php:209
+#: includes/Tools/Pages.php:216
 msgid "Attendee cards — %s"
 msgstr ""
 
-#: includes/Tools/Pages.php:230
-#: includes/Tools/Pages.php:257
+#: includes/Tools/Pages.php:239
+#: includes/Tools/Pages.php:266
 msgid "Print / Save as PDF"
 msgstr ""
 
-#: includes/Tools/Pages.php:285
+#: includes/Tools/Pages.php:294
 msgid "No events."
 msgstr ""
 
 #. translators: 1: number of events, 2: date and time
-#: includes/Tools/Pages.php:287
+#: includes/Tools/Pages.php:296
 msgid "%1$d event — generated %2$s"
 msgid_plural "%1$d events — generated %2$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Tools/Pages.php:314
+#: includes/Tools/Pages.php:323
 msgid "No RSVPs."
 msgstr ""
 
-#: sepo-events.php:25
+#: sepo-events.php:24
 msgid "Sepo Events needs PHP 8.1 or newer. The plugin is installed but not running."
 msgstr ""
 

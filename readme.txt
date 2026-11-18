@@ -4,7 +4,7 @@ Tags: events, rsvp, registration, check-in, calendar
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.3.6
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,9 @@ Sepo Events gives each event its own page with Details, Host and RSVPs tabs besi
 * The Event details box sets the start and end (with time zone, or all day), location, capacity, what the RSVP form asks for, extra seats, sign-in only, closing registration, price and currency, the host and a details table.
 * Sort events into **categories** (Events → Categories, or the Categories panel while editing) — Workshops, Sports, Services, whatever suits you. Visitors filter the events list by them.
 * A private event uses WordPress's own Private visibility: only editors see it, and nobody can RSVP to it.
-* Each event has its own page at `/events/<event-slug>/` and a calendar file at `/events/<event-slug>.ics` (the "Add to calendar" button).
+* Each event has its own page at `/events/<event-slug>/` and a calendar file at `/events/<event-slug>.ics` (the "Add to calendar" link).
+* A clear "When and where" box: a calendar date, the place and price with icons, a seats bar and a single RSVP now button that opens the form.
+* Event details shown large, each with an icon chosen from its name.
 
 = RSVPs =
 
@@ -39,6 +41,14 @@ Sepo Events gives each event its own page with Details, Host and RSVPs tabs besi
 * On **Events → RSVPs**, each registration with proof shows "proof to check" or "payment checked". Open it to see the files (images as previews, PDFs open in the browser, Word documents download) and mark the payment as checked. People see "Waiting to be checked" or "Checked" on their RSVP. New files or a changed amount send a payment back to "to check".
 * Set the largest file under **Events → Settings** (never above what your server accepts). The host alert address is told when proof arrives later.
 * Deleting an RSVP, purging an event, erasing a person's data or deleting the event removes their files too.
+
+= Tickets with QR codes for paid events =
+
+* On a paid event, the ticket is issued only once a manager marks the payment as checked. Until then people see "Your ticket will appear here once your payment has been checked", and their confirmation email says the same.
+* Marking the payment as checked emails the ticket straight away: a QR code for each person on the registration, with their code written out, a link to open or print the ticket, the event page and a calendar link. The dashboard says where it was sent, and **Email the ticket again** resends it.
+* The ticket also shows on the person's RSVP on the event page, and on a private ticket page they can print or save as a PDF.
+* **Undo checked** takes the ticket back. At the door, the scanner warns about anyone whose payment has not been checked, with **Check in anyway** for the door staff to decide. Printed attendee cards leave the QR code off until the payment is checked.
+* Free events work as before: the ticket is ready as soon as the seat is confirmed.
 
 = Emails =
 
@@ -131,6 +141,17 @@ The REST API lives under `/wp-json/sepo-events/v1/` (`rsvp`, `cancel`, `proof`, 
 3. Events in the admin with dates, seats and RSVPs.
 
 == Changelog ==
+
+= 1.5.0 =
+* New: a redesigned When and where box: the start date on a calendar tile, the times on their own lines, the time zone as people say it, the place and price with icons, and a bar for the seats taken.
+* New: one action in the box, the way to register. RSVP now, Join the waitlist or View your RSVP opens the RSVPs tab and puts the cursor in the form; Add to calendar and Manage RSVPs are small links beneath it.
+* Improvement: event details are shown large, each with an icon chosen from its name, its name small above and its value large.
+
+= 1.4.0 =
+* Tickets with QR codes for paid events: issued when a manager marks the payment as checked, emailed at once with a QR code for each person, shown on the event page and on a private ticket page to print or save as PDF.
+* Email the ticket again from a registration's details; the dashboard shows when it was emailed.
+* Until the payment is checked, people see that the ticket follows, printed cards leave the QR code off, and the door scanner warns with Check in anyway.
+* Plugin URI removed from the plugin header; the Author URI stays.
 
 = 1.3.6 =
 * The plugin is by Euneolink Solutions. Its plugin page and author page are edu.sepodesk.com.

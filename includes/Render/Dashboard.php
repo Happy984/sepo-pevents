@@ -153,7 +153,20 @@ final class Dashboard
             'dProof' => __('Proof of payment', 'sepo-events'), 'noProof' => __('No proof attached.', 'sepo-events'),
             'markChecked' => __('Mark payment as checked', 'sepo-events'), 'unmark' => __('Undo checked', 'sepo-events'),
             /* translators: %1$s: value, %2$s: value. */
-            'checkedBy' => __('Checked by %1$s, %2$s', 'sepo-events'), 'checkedMsg' => __('Payment marked as checked.', 'sepo-events'), 'uncheckedMsg' => __('Payment check removed.', 'sepo-events'),
+            'checkedBy' => __('Checked by %1$s, %2$s', 'sepo-events'), 'checkedMsg' => __('Payment marked as checked.', 'sepo-events'),
+            /* translators: %s: email address */
+            'ticketSentMsg' => __('Payment checked. The ticket with its QR code was emailed to %s.', 'sepo-events'),
+            'ticketNoMail' => __('Payment checked. No ticket was emailed: this registration has no email address, or the site could not send it. Open the ticket from the event page instead.', 'sepo-events'),
+            /* translators: %s: email address */
+            'ticketAgainMsg' => __('Ticket emailed again to %s.', 'sepo-events'),
+            'dTicket' => __('Ticket', 'sepo-events'),
+            'ticketWaiting' => __('Issued when the payment is marked as checked.', 'sepo-events'),
+            /* translators: %s: date and time */
+            'ticketSentAt' => __('Emailed %s', 'sepo-events'),
+            'ticketNotSent' => __('Ready, not emailed yet', 'sepo-events'),
+            'sendAgain' => __('Email the ticket again', 'sepo-events'),
+            'sendTicket' => __('Email the ticket', 'sepo-events'),
+            'sending' => __('Sending…', 'sepo-events'), 'uncheckedMsg' => __('Payment check removed.', 'sepo-events'),
             'open' => __('Open', 'sepo-events'),
             'delete_' => __('Delete', 'sepo-events'), 'restore' => __('Restore', 'sepo-events'), 'deleteForever' => __('Delete permanently', 'sepo-events'),
             'inBin' => __('in bin', 'sepo-events'), 'removeRsvps' => __('Remove RSVPs', 'sepo-events'),

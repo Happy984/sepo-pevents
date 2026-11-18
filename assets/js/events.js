@@ -332,6 +332,20 @@
       });
     });
     if (window.location.hash === '#rsvp') { activate('rsvps'); }
+    // The one action in When and where opens the RSVP form and brings it into view.
+    qa(root, '[data-ev-goto]').forEach(function (go) {
+      go.addEventListener('click', function (e) {
+        var name = go.getAttribute('data-ev-goto');
+        var panel = root.querySelector('[data-ev-panel="' + name + '"]');
+        if (!panel) { return; }
+        e.preventDefault();
+        activate(name);
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        (root.querySelector('.ev-tabs') || panel).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        var first = panel.querySelector('input:not([type="hidden"]), select, textarea, button');
+        if (first) { setTimeout(function () { first.focus({ preventScroll: true }); }, reduce ? 0 : 350); }
+      });
+    });
 
     // Attendee rows and the expected total
     var form = root.querySelector('[data-ev-form]');

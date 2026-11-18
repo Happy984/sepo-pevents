@@ -63,6 +63,8 @@ final class Pages
                 'missingBody' => __('Choose an event and enter a code, email or phone.', 'sepo-events'),
                 'incomplete'  => __('Incomplete', 'sepo-events'),
                 'notIn'       => __('Not checked in', 'sepo-events'),
+                'unpaid'      => __('Payment not checked', 'sepo-events'),
+                'letIn'       => __('Check in anyway', 'sepo-events'),
                 'error'       => __('Error', 'sepo-events'),
                 'noReply'     => __('No response', 'sepo-events'),
                 'noReplyBody' => __('The site did not return a usable reply.', 'sepo-events'),
@@ -158,6 +160,9 @@ button:focus-visible{outline:2px solid #2ea08a;outline-offset:2px}
 .result.ok{background:rgba(46,160,67,.16);border:1px solid #2ea043}
 .result.warn{background:rgba(214,158,46,.16);border:1px solid #d69e2e}
 .result.err{background:rgba(161,18,18,.2);border:1px solid #c94848}
+.ck-anyway{display:block;margin-top:12px;min-height:40px;padding:0 16px;border:0;border-radius:999px;background:#d69e2e;color:#1b1407;font:inherit;font-weight:700;cursor:pointer}
+.ck-anyway:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.ck-anyway[aria-busy="true"]{opacity:.7;cursor:progress}
 .result .name{font-size:1.15rem;font-weight:700;margin:0 0 2px}
 .result .meta{font-size:.85rem;color:#c3cad0;margin:0 0 2px}
 .result .tag{display:inline-block;margin-top:8px;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:rgba(255,255,255,.12)}
@@ -197,7 +202,9 @@ CSS;
                 . ($p['status'] === 'waitlist' ? '<span class="role role--wait">' . esc_html__('Waitlist', 'sepo-events') . '</span>' : '') . '</div>'
                 . '<div class="badge-name">' . esc_html($p['name'] !== '' ? $p['name'] : __('Guest', 'sepo-events')) . '</div>'
                 . '<div class="badge-contact">' . esc_html($p['email']) . ($p['email'] !== '' && $p['phone'] !== '' ? '<br>' : '') . esc_html($p['phone']) . '</div>'
-                . '<div class="badge-qr">' . Qr::svg($url, 200, 'M', __('Check-in code', 'sepo-events')) . '<div class="badge-code">' . esc_html($p['code']) . '</div></div>'
+                . (!empty($p['unpaid'])
+                    ? '<div class="badge-qr badge-qr--unpaid"><div class="badge-unpaid">' . esc_html__('Payment not checked yet', 'sepo-events') . '<small>' . esc_html__('The QR code is printed once the payment has been checked.', 'sepo-events') . '</small></div></div>'
+                    : '<div class="badge-qr">' . Qr::svg($url, 200, 'M', __('Check-in code', 'sepo-events')) . '<div class="badge-code">' . esc_html($p['code']) . '</div></div>')
                 . '<div class="badge-foot">' . esc_html($when) . ($when !== '' && $c['location'] !== '' ? '<br>' : '') . esc_html((string) $c['location']) . '</div>'
                 . '</div>';
         }
@@ -222,6 +229,8 @@ body{margin:0;font:14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,s
 .badge-name{font-size:1.6rem;font-weight:800;line-height:1.15;word-break:break-word}
 .badge-contact{font-size:.85rem;color:#4b5563;word-break:break-word}
 .badge-qr svg{display:block;margin:0 auto}
+.badge-unpaid{display:flex;flex-direction:column;justify-content:center;gap:6px;width:200px;height:200px;margin:0 auto;padding:16px;border-radius:12px;background:#fcf2e3;color:#5c3a06;font-weight:700}
+.badge-unpaid small{font-weight:400;font-size:.75rem}
 .badge-code{margin-top:4px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9rem;font-weight:700;letter-spacing:.14em}
 .badge-foot{margin-top:auto;font-size:.78rem;color:#6b7280;border-top:1px solid #eee;padding-top:.12in;width:100%}
 @media print{.toolbar{display:none}body{background:#fff}.badge{margin:0;border:none;border-radius:0}}

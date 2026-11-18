@@ -393,7 +393,7 @@ final class Rsvps
      *
      * @return array{found:bool,already:bool,refused:string,person:array{type:string,name:string,email:string,phone:string},record_id:string,status:string,at:?int,matched_by:string}
      */
-    public static function checkIn(int $eventId, string $value): array
+    public static function checkIn(int $eventId, string $value, bool $needsPayment = false, bool $force = false): array
     {
         global $wpdb;
         $value = trim($value);
@@ -405,7 +405,7 @@ final class Rsvps
         $email = strtolower($value);
         $phone = self::phoneKey($value);
 
-        return self::locked($eventId, static function (array $rows) use ($code, $email, $phone, $miss, $wpdb): array {
+        return self::locked($eventId, static function (array $rows) use ($code, $email, $phone, $miss, $wpdb, $needsPayment, $force): array {
             // Live registrations first: a cancelled record matching the same email must not win.
             usort($rows, static fn($a, $b) => ($a['status'] === 'cancelled') <=> ($b['status'] === 'cancelled'));
             foreach (['code', 'email', 'phone'] as $by) {
@@ -435,6 +435,11 @@ final class Rsvps
                         ];
                         if ($r['status'] === 'cancelled') {
                             $result['refused'] = 'cancelled';
+                            return $result;
+                        }
+                        // A paid event's payment must be checked first, unless the door staff choose to let them in.
+                        if ($needsPayment && (int) $r['verified_at'] <= 0 && !$result['already'] && !$force) {
+                            $result['refused'] = 'unpaid';
                             return $result;
                         }
                         if (!$result['already']) {

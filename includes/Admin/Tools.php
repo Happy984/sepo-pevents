@@ -112,12 +112,13 @@ final class Tools
 
         $people = [];
         foreach ($records as $r) {
-            $people[] = ['name' => $r['name'], 'email' => $r['guest_email'], 'phone' => $r['phone'], 'type' => 'primary', 'code' => $r['checkin_code'], 'status' => $r['status']];
+            $unpaid = \SepoEvents\Tickets::waitingForPayment($r, $c);
+            $people[] = ['name' => $r['name'], 'email' => $r['guest_email'], 'phone' => $r['phone'], 'type' => 'primary', 'code' => $r['checkin_code'], 'status' => $r['status'], 'unpaid' => $unpaid];
             foreach ($r['attendees'] as $a) {
                 if (trim((string) ($a['name'] ?? '')) === '') {
                     continue;
                 }
-                $people[] = ['name' => (string) $a['name'], 'email' => (string) ($a['email'] ?? ''), 'phone' => (string) ($a['phone'] ?? ''), 'type' => 'attendee', 'code' => (string) ($a['code'] ?? ''), 'status' => $r['status']];
+                $people[] = ['name' => (string) $a['name'], 'email' => (string) ($a['email'] ?? ''), 'phone' => (string) ($a['phone'] ?? ''), 'type' => 'attendee', 'code' => (string) ($a['code'] ?? ''), 'status' => $r['status'], 'unpaid' => $unpaid];
             }
         }
         // A card whose code can never scan is worse than no card.

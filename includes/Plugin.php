@@ -38,6 +38,7 @@ final class Plugin
         Embeds::hook();
         Privacy::hook();
         Proofs::hook();
+        Tickets::hook();
         Admin\Tools::hook();
 
         if (is_admin()) {
